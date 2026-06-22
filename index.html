@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O Verbo da Vida — Orações Matinais sobre 1 João</title>
+<meta name="description" content="Jornada devocional interativa por 1 João 1–2, da série Orações Matinais, de Arisvaldo Marinho Cunha. Da treva à luz, à comunhão e à permanência em Cristo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --ivory:#F4ECDC; --ivory-dim:#CBBF9E; --ivory-faint:#9C947B;
+  --gold:#D9A93E; --gold-bright:#F2D27A; --gold-deep:#B98726;
+  --ink:#0A0C18;
+  --display:'Cinzel', Georgia, 'Times New Roman', serif;
+  --body:'EB Garamond', Georgia, 'Times New Roman', serif;
+
+  /* tema corrente — trocado por JS conforme o movimento */
+  --bg-a:#1B2140; --bg-b:#0A0C18;
+  --accent:#D9A93E;
+  --accent-soft:rgba(217,169,62,.14);
+  --glow:rgba(217,169,62,.22);
+
+  --fs:1;            /* multiplicador de fonte (A- / A+) */
+  --maxw:760px;
+  --trans:1.6s cubic-bezier(.4,0,.2,1);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--body);
+  color:var(--ivory);
+  background:var(--bg-b);
+  line-height:1.72;
+  min-height:100vh;
+  overflow-x:hidden;
+  transition:background var(--trans);
+  -webkit-font-smoothing:antialiased;
+}
+
+/* fundo: gradiente litúrgico + aurora + estrelas */
+.bg-layer{position:fixed;inset:0;z-index:-3;
+  background:radial-gradient(120% 90% at 50% -10%, var(--bg-a) 0%, var(--bg-b) 62%);
+  transition:background var(--trans);}
+.aurora{position:fixed;top:-30vh;left:50%;transform:translateX(-50%);
+  width:140vw;height:80vh;z-index:-2;pointer-events:none;
+  background:radial-gradient(closest-side, var(--glow), transparent 70%);
+  filter:blur(28px);opacity:.9;animation:breathe 13s ease-in-out infinite;
+  transition:background var(--trans);}
+@keyframes breathe{0%,100%{opacity:.6;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.06)}}
+#stars{position:fixed;inset:0;z-index:-1;pointer-events:none}
+
+/* ============ TIPOGRAFIA UTIL ============ */
+.eyebrow{font-family:var(--display);font-weight:600;
+  font-size:calc(.69rem * var(--fs));letter-spacing:.28em;text-transform:uppercase;
+  color:var(--accent);opacity:.92}
+.serif-it{font-style:italic}
+
+/* ============ TOPO FIXO ============ */
+header.top{position:sticky;top:0;z-index:40;
+  display:flex;align-items:center;gap:.7rem;
+  padding:.55rem clamp(.8rem,3vw,1.6rem);
+  background:linear-gradient(to bottom, rgba(10,12,24,.94), rgba(10,12,24,.74) 70%, transparent);
+  backdrop-filter:blur(8px);}
+.brand{font-family:var(--display);font-weight:600;letter-spacing:.12em;
+  font-size:calc(.74rem * var(--fs));color:var(--ivory-dim);text-transform:uppercase;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand b{color:var(--gold)}
+.top-spacer{flex:1}
+.tool{appearance:none;border:1px solid rgba(217,169,62,.34);background:rgba(217,169,62,.06);
+  color:var(--ivory);font-family:var(--display);font-size:calc(.66rem * var(--fs));
+  letter-spacing:.08em;border-radius:999px;padding:.34rem .62rem;cursor:pointer;
+  display:inline-flex;align-items:center;gap:.32rem;transition:.18s;white-space:nowrap}
+.tool:hover{background:rgba(217,169,62,.16);border-color:var(--gold)}
+.tool:focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px}
+.tool[aria-pressed="true"]{background:var(--gold);color:#1a1405;border-color:var(--gold)}
+.fontgrp{display:inline-flex;border:1px solid rgba(217,169,62,.34);border-radius:999px;overflow:hidden}
+.fontgrp button{appearance:none;border:0;background:rgba(217,169,62,.06);color:var(--ivory);
+  width:2rem;height:1.86rem;cursor:pointer;font-family:var(--display);font-size:.84rem;transition:.16s}
+.fontgrp button:hover{background:rgba(217,169,62,.18)}
+.fontgrp button:focus-visible{outline:2px solid var(--gold-bright);outline-offset:-2px}
+.fontgrp button:first-child{border-right:1px solid rgba(217,169,62,.24)}
+
+/* ============ TRILHA DE PROGRESSO ============ */
+.rail-wrap{position:sticky;top:46px;z-index:35;padding:.4rem clamp(.8rem,3vw,1.6rem) .2rem;
+  background:linear-gradient(to bottom, rgba(10,12,24,.7), transparent)}
+.rail{display:flex;align-items:center;gap:.32rem;max-width:var(--maxw);margin:0 auto;
+  overflow-x:auto;scrollbar-width:none;padding:.3rem 0}
+.rail::-webkit-scrollbar{display:none}
+.dot{flex:0 0 auto;position:relative;width:13px;height:13px;border-radius:50%;
+  border:1.5px solid var(--ivory-faint);background:transparent;cursor:pointer;padding:0;
+  transition:.22s}
+.dot::after{content:"";position:absolute;inset:-9px}/* alvo de toque ampliado */
+.dot:hover{border-color:var(--gold-bright);transform:scale(1.18)}
+.dot:focus-visible{outline:2px solid var(--gold-bright);outline-offset:3px}
+.dot.done{background:var(--accent);border-color:var(--accent);opacity:.55}
+.dot.active{background:var(--gold-bright);border-color:var(--gold-bright);
+  box-shadow:0 0 0 4px var(--accent-soft);transform:scale(1.2)}
+
+/* ============ PALCO / ESTAÇÕES ============ */
+main{padding:1.2rem clamp(.9rem,4vw,1.6rem) 7rem}
+.stage{max-width:var(--maxw);margin:0 auto}
+.station{display:none;animation:rise .9s cubic-bezier(.2,.7,.2,1)}
+.station.show{display:block}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+.loc{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.1rem}
+.loc .pos{font-family:var(--display);font-size:calc(.66rem * var(--fs));letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ivory-faint)}
+.loc .mov-tag{font-family:var(--display);font-size:calc(.64rem * var(--fs));letter-spacing:.16em;
+  text-transform:uppercase;color:var(--accent);text-align:right}
+
+/* ===== ABERTURA (hero) ===== */
+.hero{text-align:center;padding:2.2rem 0 1rem}
+.emblema{width:clamp(118px,30vw,168px);height:auto;margin:0 auto 1.6rem;display:block}
+.hero h1{font-family:var(--display);font-weight:700;line-height:1.04;
+  font-size:calc(clamp(2.1rem,7vw,3.6rem) * var(--fs));
+  color:var(--ivory);letter-spacing:.02em;text-shadow:0 2px 30px rgba(0,0,0,.5)}
+.hero h1 .sub{display:block;font-size:.42em;font-weight:500;letter-spacing:.22em;
+  color:var(--gold);margin-top:1rem;text-transform:uppercase}
+.hero .anchor{font-family:var(--body);font-style:italic;
+  font-size:calc(clamp(1.06rem,2.6vw,1.32rem) * var(--fs));color:var(--ivory-dim);
+  max-width:34ch;margin:1.8rem auto 0;line-height:1.6}
+.hero .anchor cite{display:block;font-style:normal;font-family:var(--display);
+  font-size:.62em;letter-spacing:.16em;color:var(--accent);margin-top:.8rem;text-transform:uppercase}
+.hero .byline{margin-top:2.2rem;font-family:var(--display);letter-spacing:.14em;
+  font-size:calc(.72rem * var(--fs));color:var(--ivory-faint);text-transform:uppercase}
+.lead-note{max-width:50ch;margin:2.4rem auto 0;padding:1.2rem 1.4rem;
+  border:1px solid rgba(217,169,62,.22);border-radius:14px;background:rgba(217,169,62,.04);
+  font-size:calc(1.02rem * var(--fs));color:var(--ivory-dim);line-height:1.66}
+.lead-note .lt{font-family:var(--display);font-size:calc(.66rem * var(--fs));letter-spacing:.2em;
+  color:var(--accent);text-transform:uppercase;display:block;margin-bottom:.5rem}
+.hero-divider{width:54px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  margin:2rem auto 0}
+
+/* ===== MOVIMENTO (capa de seção) ===== */
+.mov-cover{text-align:center;padding:3rem 0 1rem}
+.mov-num{font-family:var(--display);font-size:calc(clamp(2.6rem,9vw,4.2rem) * var(--fs));
+  font-weight:700;color:var(--accent);line-height:1;opacity:.92;
+  text-shadow:0 0 40px var(--glow)}
+.mov-cover h2{font-family:var(--display);font-weight:600;
+  font-size:calc(clamp(1.5rem,5vw,2.3rem) * var(--fs));color:var(--ivory);
+  letter-spacing:.05em;margin:.7rem 0 1.1rem}
+.mov-cover p{max-width:44ch;margin:0 auto;color:var(--ivory-dim);
+  font-size:calc(1.06rem * var(--fs));font-style:italic;line-height:1.66}
+
+/* ===== PERÍCOPE (versículo) ===== */
+.scripture{margin:0 0 1.6rem;text-align:center;padding:1.3rem 0 .4rem}
+.scripture .ref{font-family:var(--display);font-size:calc(.74rem * var(--fs));letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+.scripture blockquote{font-family:var(--body);font-style:italic;font-weight:500;
+  font-size:calc(clamp(1.24rem,3.4vw,1.62rem) * var(--fs));line-height:1.5;
+  color:var(--ivory);max-width:36ch;margin:0 auto;text-wrap:balance}
+.scripture .drop{font-family:var(--display);color:var(--accent);opacity:.5}
+
+.section-label{display:flex;align-items:center;gap:.7rem;margin:2.2rem 0 1rem}
+.section-label .ln{flex:1;height:1px;background:linear-gradient(90deg,var(--accent-soft),transparent)}
+.section-label .ln.l{background:linear-gradient(90deg,transparent,var(--accent-soft))}
+.section-label span{font-family:var(--display);font-size:calc(.64rem * var(--fs));
+  letter-spacing:.22em;text-transform:uppercase;color:var(--ivory-faint);white-space:nowrap}
+
+.commentary{font-size:calc(clamp(1.04rem,2.2vw,1.16rem) * var(--fs));
+  color:var(--ivory);line-height:1.84;text-align:justify;hyphens:auto}
+.commentary::first-letter{}
+
+.prayer{margin-top:.4rem;padding:1.5rem 1.5rem 1.6rem;border-radius:16px;
+  background:linear-gradient(160deg, var(--accent-soft), rgba(255,255,255,.015));
+  border:1px solid rgba(217,169,62,.26);position:relative;overflow:hidden}
+.prayer::before{content:"";position:absolute;top:-40%;right:-10%;width:50%;height:120%;
+  background:radial-gradient(closest-side,var(--glow),transparent 70%);opacity:.5;filter:blur(10px)}
+.prayer p{position:relative;font-style:italic;font-size:calc(1.08rem * var(--fs));
+  line-height:1.74;color:var(--ivory)}
+.prayer .amen{position:relative;display:block;margin-top:1rem;font-family:var(--display);
+  font-size:calc(.7rem * var(--fs));letter-spacing:.24em;text-transform:uppercase;color:var(--accent)}
+
+/* ===== RODA DE REFLEXÃO ===== */
+.wheel-intro{text-align:center;margin-bottom:1.6rem}
+.wheel-intro h2{font-family:var(--display);font-weight:600;
+  font-size:calc(clamp(1.6rem,5vw,2.2rem) * var(--fs));color:var(--ivory);letter-spacing:.04em}
+.wheel-intro p{color:var(--ivory-dim);max-width:46ch;margin:.8rem auto 0;
+  font-size:calc(1.04rem * var(--fs));font-style:italic}
+.spheres{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin:1.6rem 0}
+.sphere{appearance:none;font-family:var(--display);font-size:calc(.78rem * var(--fs));
+  letter-spacing:.08em;padding:.55rem 1.1rem;border-radius:999px;cursor:pointer;
+  border:1px solid rgba(217,169,62,.4);background:rgba(217,169,62,.05);color:var(--ivory);
+  transition:.2s;display:inline-flex;align-items:center;gap:.5rem}
+.sphere:hover{background:rgba(217,169,62,.16)}
+.sphere:focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px}
+.sphere.active{background:var(--gold);color:#1a1405;border-color:var(--gold);font-weight:600}
+.sphere .count{font-family:var(--body);font-size:.82em;opacity:.7}
+.sphere.active .count{opacity:.85}
+
+.qcard{border:1px solid rgba(217,169,62,.28);border-radius:18px;padding:1.6rem 1.4rem;
+  background:rgba(255,255,255,.02);margin-bottom:1.2rem;min-height:120px;
+  display:flex;flex-direction:column;justify-content:center;text-align:center}
+.qcard .q{font-size:calc(clamp(1.12rem,3vw,1.34rem) * var(--fs));line-height:1.5;
+  color:var(--ivory);font-style:italic}
+.qcard .placeholder{color:var(--ivory-faint);font-style:italic;
+  font-size:calc(1.04rem * var(--fs))}
+.qmeta{font-family:var(--display);font-size:calc(.6rem * var(--fs));letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:.9rem}
+
+.draw-row{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center;margin-bottom:1.4rem}
+.btn{appearance:none;font-family:var(--display);font-size:calc(.78rem * var(--fs));
+  letter-spacing:.08em;border-radius:999px;padding:.7rem 1.4rem;cursor:pointer;transition:.2s;
+  border:1px solid var(--accent);background:var(--accent);color:#1a1405;font-weight:600;
+  display:inline-flex;align-items:center;gap:.45rem}
+.btn:hover{background:var(--gold-bright);border-color:var(--gold-bright)}
+.btn:focus-visible{outline:2px solid var(--gold-bright);outline-offset:3px}
+.btn.ghost{background:transparent;color:var(--ivory);border-color:rgba(217,169,62,.4);font-weight:500}
+.btn.ghost:hover{background:rgba(217,169,62,.12)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+
+.answer-box{margin-bottom:1.2rem}
+.answer-box label{font-family:var(--display);font-size:calc(.62rem * var(--fs));letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ivory-faint);display:block;margin-bottom:.5rem}
+textarea, input[type=text]{width:100%;font-family:var(--body);
+  font-size:calc(1.05rem * var(--fs));color:var(--ivory);line-height:1.6;
+  background:rgba(0,0,0,.22);border:1px solid rgba(217,169,62,.28);border-radius:12px;
+  padding:.85rem 1rem;resize:vertical}
+textarea{min-height:104px}
+textarea:focus, input[type=text]:focus{outline:none;border-color:var(--gold);
+  box-shadow:0 0 0 3px var(--accent-soft)}
+.author-row{margin:.7rem 0 1rem}
+
+.saved-head{font-family:var(--display);font-size:calc(.7rem * var(--fs));letter-spacing:.18em;
+  text-transform:uppercase;color:var(--accent);margin:2rem 0 1rem;
+  display:flex;align-items:center;gap:.7rem}
+.saved-head .ln{flex:1;height:1px;background:rgba(217,169,62,.2)}
+.reflist{list-style:none;display:flex;flex-direction:column;gap:.8rem}
+.reflist li{border:1px solid rgba(217,169,62,.2);border-radius:14px;padding:1rem 1.1rem;
+  background:rgba(255,255,255,.018);animation:rise .5s ease}
+.reflist .rl-meta{font-family:var(--display);font-size:calc(.58rem * var(--fs));letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ivory-faint);margin-bottom:.45rem;
+  display:flex;justify-content:space-between;gap:1rem;align-items:baseline}
+.reflist .rl-q{font-style:italic;color:var(--ivory-dim);font-size:calc(.96rem * var(--fs));margin-bottom:.5rem}
+.reflist .rl-a{color:var(--ivory);font-size:calc(1.04rem * var(--fs));line-height:1.6;white-space:pre-wrap}
+.reflist .rl-author{color:var(--accent);font-style:normal}
+.reflist .del{appearance:none;border:0;background:transparent;color:var(--ivory-faint);
+  cursor:pointer;font-family:var(--display);font-size:.62rem;letter-spacing:.1em;
+  text-transform:uppercase;padding:.2rem .4rem;border-radius:6px;transition:.16s}
+.reflist .del:hover{color:#e88;background:rgba(220,80,80,.1)}
+.empty{text-align:center;color:var(--ivory-faint);font-style:italic;
+  padding:1.4rem;font-size:calc(1.02rem * var(--fs))}
+
+.export-row{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center;margin-top:1.6rem}
+
+/* ===== CAMINHOS PRÁTICOS ===== */
+.paths{display:grid;gap:1rem;margin-top:1.6rem}
+@media(min-width:620px){.paths{grid-template-columns:1fr 1fr}}
+.path{text-align:left;border:1px solid rgba(217,169,62,.28);border-radius:16px;
+  padding:1.3rem 1.3rem 1.2rem;background:rgba(255,255,255,.02);cursor:pointer;transition:.22s;
+  font-family:inherit;color:inherit;width:100%}
+.path:hover{border-color:var(--gold);background:rgba(217,169,62,.07)}
+.path:focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px}
+.path[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--gold)}
+.path h3{font-family:var(--display);font-size:calc(1rem * var(--fs));font-weight:600;
+  color:var(--gold);letter-spacing:.04em;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem}
+.path p{color:var(--ivory-dim);font-size:calc(1.02rem * var(--fs));line-height:1.62}
+.path .state{margin-top:.9rem;font-family:var(--display);font-size:calc(.62rem * var(--fs));
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ivory-faint)}
+.path[aria-pressed="true"] .state{color:var(--accent)}
+.path[aria-pressed="true"] .state::before{content:"✓ "}
+
+/* ===== BÊNÇÃO ===== */
+.benc{text-align:center;padding:2rem 0 1rem}
+.benc .tri{display:flex;flex-direction:column;gap:1.4rem;max-width:30ch;margin:2rem auto}
+.benc .tri div{font-family:var(--display);font-size:calc(clamp(1.2rem,4vw,1.7rem) * var(--fs));
+  letter-spacing:.05em;color:var(--ivory)}
+.benc .tri .accent{color:var(--gold)}
+.benc .amen{font-family:var(--display);font-size:calc(clamp(2rem,7vw,3rem) * var(--fs));
+  font-weight:700;color:var(--gold);letter-spacing:.3em;margin-top:1.4rem;
+  text-shadow:0 0 40px var(--glow)}
+.benc .closing{max-width:42ch;margin:2rem auto 0;color:var(--ivory-dim);font-style:italic;
+  font-size:calc(1.06rem * var(--fs));line-height:1.7}
+
+/* ===== NAV INFERIOR ===== */
+.botnav{position:fixed;left:0;right:0;bottom:0;z-index:40;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:.7rem clamp(.9rem,4vw,1.6rem);
+  background:linear-gradient(to top, rgba(10,12,24,.96), rgba(10,12,24,.7) 60%, transparent);
+  backdrop-filter:blur(8px)}
+.nav-btn{appearance:none;font-family:var(--display);font-size:calc(.74rem * var(--fs));
+  letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:.2s;
+  border:1px solid rgba(217,169,62,.4);background:rgba(217,169,62,.06);color:var(--ivory);
+  border-radius:999px;padding:.6rem 1.2rem;display:inline-flex;align-items:center;gap:.4rem}
+.nav-btn:hover:not(:disabled){background:rgba(217,169,62,.18);border-color:var(--gold)}
+.nav-btn:focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px}
+.nav-btn:disabled{opacity:.3;cursor:not-allowed}
+.nav-btn.fwd{background:var(--accent);color:#1a1405;border-color:var(--accent);font-weight:600}
+.nav-btn.fwd:hover{background:var(--gold-bright);border-color:var(--gold-bright)}
+.nav-center{font-family:var(--display);font-size:calc(.64rem * var(--fs));letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ivory-faint);text-align:center;line-height:1.4}
+
+/* ===== ÁUDIO ===== */
+.audio-pop{position:fixed;right:clamp(.7rem,3vw,1.4rem);bottom:4.6rem;z-index:45;
+  display:flex;align-items:center;gap:.6rem;padding:.5rem .7rem;border-radius:999px;
+  background:rgba(10,12,24,.92);border:1px solid rgba(217,169,62,.34);
+  backdrop-filter:blur(10px);box-shadow:0 8px 28px rgba(0,0,0,.4);
+  max-width:calc(100vw - 2rem);transition:.3s}
+.audio-pop.min{padding:.5rem}
+.audio-pop.min .av-extra{display:none}
+.aud-btn{appearance:none;border:0;cursor:pointer;width:2.4rem;height:2.4rem;border-radius:50%;
+  background:var(--accent);color:#1a1405;display:grid;place-items:center;transition:.2s;flex:0 0 auto}
+.aud-btn:hover{background:var(--gold-bright)}
+.aud-btn:focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px}
+.aud-label{font-family:var(--display);font-size:calc(.6rem * var(--fs));letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ivory-dim);max-width:120px;line-height:1.3}
+.vol{width:78px;accent-color:var(--gold)}
+.aud-x{appearance:none;border:0;background:transparent;color:var(--ivory-faint);cursor:pointer;
+  font-size:1rem;line-height:1;padding:.2rem .3rem;border-radius:6px}
+.aud-x:hover{color:var(--ivory)}
+
+/* toast */
+.toast{position:fixed;left:50%;bottom:8.4rem;transform:translateX(-50%) translateY(20px);
+  z-index:60;background:rgba(10,12,24,.96);border:1px solid var(--gold);color:var(--ivory);
+  font-size:calc(.92rem * var(--fs));padding:.7rem 1.2rem;border-radius:12px;
+  box-shadow:0 8px 28px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:.3s;max-width:88vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+.persist-note{text-align:center;font-size:calc(.78rem * var(--fs));color:var(--ivory-faint);
+  margin-top:1.4rem;font-style:italic}
+.persist-note button{background:none;border:0;color:var(--accent);cursor:pointer;
+  text-decoration:underline;font-family:inherit;font-size:inherit;font-style:italic}
+
+/* ===== IMPRESSÃO ===== */
+@media print{
+  .bg-layer,.aurora,#stars,header.top,.rail-wrap,.botnav,.audio-pop,.toast,
+  .draw-row,.spheres,.export-row,.answer-box,.persist-note,.tool,.fontgrp,.del{display:none !important}
+  body{background:#fff !important;color:#1a1a1a !important}
+  .station{display:block !important;page-break-inside:avoid;margin-bottom:2rem}
+  main{padding:0}
+  .stage{max-width:100%}
+  .scripture blockquote,.commentary,.prayer p,.qcard .q,.reflist .rl-a{color:#1a1a1a !important}
+  .prayer{background:#f6f1e6 !important;border-color:#c8a94a !important}
+  textarea{display:none}
+  .print-answer{display:block !important;white-space:pre-wrap;border-left:3px solid #c8a94a;
+    padding:.4rem 0 .4rem .9rem;color:#1a1a1a;font-style:italic;margin-top:.4rem}
+  h1,h2,h3,.eyebrow,.ref,.qmeta{color:#7a5a12 !important}
+}
+.print-answer{display:none}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important;transition:background .2s, color .2s !important}
+  .aurora{animation:none}
+}
+</style>
+</head>
+<body>
+<div class="bg-layer"></div>
+<div class="aurora"></div>
+<canvas id="stars"></canvas>
+
+<header class="top">
+  <div class="brand">Orações Matinais · <b>1 João</b></div>
+  <div class="top-spacer"></div>
+  <div class="fontgrp" role="group" aria-label="Tamanho do texto">
+    <button id="fminus" aria-label="Diminuir texto">A−</button>
+    <button id="fplus" aria-label="Aumentar texto">A+</button>
+  </div>
+  <button class="tool" id="presentBtn" aria-pressed="false" title="Modo apresentação (texto ampliado para projeção)">Projetar</button>
+  <button class="tool" id="printBtn" title="Imprimir ou salvar em PDF">Imprimir</button>
+</header>
+
+<div class="rail-wrap">
+  <div class="rail" id="rail" role="tablist" aria-label="Estações da jornada"></div>
+</div>
+
+<main>
+  <div class="stage" id="stage"></div>
+</main>
+
+<nav class="botnav">
+  <button class="nav-btn" id="prevBtn">◂ Voltar</button>
+  <div class="nav-center" id="navCenter">—</div>
+  <button class="nav-btn fwd" id="nextBtn">Avançar ▸</button>
+</nav>
+
+<div class="audio-pop min" id="audioPop">
+  <button class="aud-btn" id="playBtn" aria-label="Tocar música de fundo">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+  </button>
+  <div class="av-extra" style="display:flex;align-items:center;gap:.55rem">
+    <span class="aud-label" id="audLabel">Música para concentração</span>
+    <input class="vol" id="vol" type="range" min="0" max="1" step="0.01" value="0.45" aria-label="Volume da música">
+    <button class="aud-x" id="audMin" aria-label="Recolher player">×</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<audio id="audio" loop preload="auto">
+  <source src="onde-o-coracao-descansa.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const DATA = {"entries": [{"ref": "1 João 1:1", "texto": "“O que era desde o princípio, o que temos ouvido, o que temos visto com os nossos próprios olhos, o que contemplamos, e as nossas mãos apalparam, com respeito ao Verbo da vida.”", "comentario": "A eternidade não permaneceu muda diante do tempo; ela falou, habitou e foi contemplada em Cristo. João anuncia o Verbo Eterno não como conceito suspenso acima da história, mas como vida manifestada aos sentidos dos apóstolos. O que era “desde o princípio” não começou a existir quando veio ao mundo; antes, entrou na nossa carne sem abandonar a glória que possuía junto ao Pai. Por isso, o testemunho cristão nasce de uma realidade santa e concreta: “o que temos ouvido, o que temos visto com os nossos próprios olhos” [1 João 1:1]. O homem, perdido em sombras, não sobe até Deus por esforço religioso; Deus desce até o homem em misericórdia soberana, fazendo-se próximo e acessível no Salvador do Mundo. A fé, então, repousa sobre a Palavra Viva, vista, ouvida e tocada, para que a alma aprenda a adorar sem fabricar imagens de Deus segundo seus próprios desejos. Onde Cristo se manifesta, a vida eterna deixa de ser promessa distante e se torna presença salvadora. O Verbo veio. A Vida brilhou. A Graça tocou a terra.", "oracao": "Ó Cristo, Verbo Eterno e Palavra Viva, nós Te adoramos porque em Ti contemplamos a plenitude da Divindade. Tu vieste em carne verdadeira, cheio de Graça e Majestade, para que pecadores fossem alcançados pela luz da Tua presença. Dá-nos coração reverente e sincero, para que nossa fé descanse na suficiência da Tua revelação e se firme em Ti, o Imutável Salvador do Mundo. Recebe nossa adoração, conduz nosso coração e faz-nos viver diante de Ti como servos da vida eterna.", "mov": 1}, {"ref": "1 João 1:2", "texto": "“(e a vida se manifestou, e nós a temos visto, e dela damos testemunho, e vo-la anunciamos, a vida eterna, a qual estava com o Pai e nos foi manifestada),", "comentario": "O maior anúncio já proclamado aos homens não nasceu da terra, mas desceu do Pai em glória e misericórdia. João contempla a manifestação da Vida Eterna não como metáfora religiosa, mas como revelação concreta do Filho de Deus no mundo. Aquele que estava junto ao Pai entrou na história humana para ser visto, testemunhado e anunciado. O apóstolo declara: “a vida se manifestou” [1 João 1:2], e nessa breve sentença resplandece todo o esplendor do Evangelho. O Verbo Eterno não permaneceu oculto atrás dos céus inacessíveis; Ele veio ao encontro de pecadores mortos em suas trevas, trazendo vida incorruptível, graça soberana e comunhão eterna com Deus. O testemunho apostólico não exalta homens, experiências ou virtudes humanas, mas aponta para Cristo Glorioso, o Salvador do Mundo, em quem a eternidade se tornou visível. Quando a alma contempla essa manifestação santa, o coração aprende que a salvação não é conquista humana, mas dom revelado pelo próprio Deus. A Vida foi revelada. A verdade foi anunciada. O Filho de Deus permanece eternamente.", "oracao": "Nós Te exaltamos, ó Cristo Glorioso, porque vieste ao mundo para revelar a plenitude da Graça e da Verdade. Tu és o Salvador do Mundo, anunciado pelos apóstolos e contemplado como a esperança eterna dos redimidos. Concede-nos coração humilde para receber o testemunho vivo das Tuas palavras e firmeza para permanecer na luz da Tua revelação. Guarda-nos na comunhão contigo, ó Verbo Eterno, até o dia em que a fé dará lugar à perfeita contemplação da Tua majestade.", "mov": 1}, {"ref": "1 João 1:3-4", "texto": "“o que temos visto e ouvido anunciamos também a vós outros, para que vós, igualmente, mantenhais comunhão conosco. Ora, a nossa comunhão é com o Pai e com seu Filho, Jesus Cristo. Estas coisas, pois, vos escrevemos para que a nossa alegria seja completa.”", "comentario": "Toda verdadeira comunhão nasce da verdade eterna anunciada em Cristo. João declara que aquilo que foi visto e ouvido acerca do Filho agora é proclamado à igreja, para que homens e mulheres sejam conduzidos na santa comunhão com Deus. O Evangelho não é mera transmissão de informação religiosa, mas participação espiritual na vida do Pai e do Seu Filho, Jesus Cristo. O apóstolo afirma: “a nossa comunhão é com o Pai e com seu Filho, Jesus Cristo” [1 João 1:3-4], revelando que toda unidade verdadeira encontra seu fundamento no Verbo Eterno. Onde Cristo é recebido, a separação produzida pelo pecado começa a ruir; onde Sua verdade resplandece, a alma encontra descanso; onde Sua Graça reina, a alegria floresce em plenitude. O coração humano procura pertencimento em vozes passageiras e alianças frágeis, mas somente o Salvador do Mundo conduz pecadores à perfeita comunhão com o Deus vivo. O testemunho apostólico continua ecoando através dos séculos, chamando a igreja para permanecer na luz da Palavra Viva. A comunhão permanece. A alegria transborda. Cristo reina eternamente.", "oracao": "Tu és a Palavra Viva, ó Cristo Glorioso! Louvamos o Teu nome, porque por meio de Ti fomos conduzidos à comunhão com o Pai. Tu és a verdade eterna anunciada pelos apóstolos, a fonte da alegria que não se desfaz diante das sombras deste mundo. Faz-nos permanecer firmes na Tua revelação, guardando nosso coração da frieza espiritual e da falsa comunhão edificada longe da Tua presença. Sustenta-nos na luz da Tua Palavra e faz florescer em nós a alegria verdadeira daqueles que pertencem ao Teu Reino eterno.", "mov": 1}, {"ref": "1 João 1:5", "texto": "“Ora, a mensagem que, da parte dele, temos ouvido e vos anunciamos é esta: que Deus é luz, e não há nele treva nenhuma.”", "comentario": "Toda verdadeira revelação começa em Deus, porque somente a luz que procede dEle pode dissipar as trevas do coração humano. João anuncia uma mensagem que não nasceu da terra, mas veio do próprio Deus: “a mensagem que, da parte dele, temos ouvido” [1 João 1:5]. A origem da mensagem determina o seu conteúdo: “Deus é luz, e não há nele treva nenhuma”. Porque procede do Pai, a menagem não exalta o homem, nem alimenta ilusões espirituais; antes, revela a santidade absoluta do Deus Vivo manifestada no Cristo Glorioso. A luz divina expõe aquilo que o coração deseja esconder: pecado, orgulho, falsidade e rebelião; mas também conduz o pecador arrependido ao descanso da graça soberana. O Verbo Eterno veio ao mundo não para negociar com as trevas, mas para vencê-las plenamente por Sua presença santa. Onde Cristo resplandece, a mentira perde sua força, o pecado é confrontado e a verdade floresce em vida eterna. A alma encontra paz não ao fugir da luz, mas ao ser alcançada por ela. Cristo permanece santo. A mensagem permanece gloriosa. A luz permanece invencível.", "oracao": "Ó Cristo Glorioso, Luz Verdadeira que procede do Pai, nós Te adoramos porque Tua presença dissipa toda sombra de engano e pecado. Tu és santo, puro e eterno, e em Ti não existe treva alguma. Que a Luz da Tua Palavra Viva governe nossos pensamentos, ilumine nossos afetos e purifique nossos caminhos diante da Tua face. Que a luz da Tua Graça resplandeça sobre nós com poder soberano, até que toda nossa vida seja rendida ao Teu Reino eterno.", "mov": 2}, {"ref": "1 João 1:6", "texto": "“Se dissermos que mantemos comunhão com ele e andarmos nas trevas, mentimos e não praticamos a verdade.”", "comentario": "Toda comunhão verdadeira com Deus produz uma vida transformada pela luz da Sua presença. João confronta a contradição de uma fé meramente declaratória ao afirmar: “Se dissermos que mantemos comunhão com ele e andarmos nas trevas, mentimos e não praticamos a verdade” [1 João 1:6]. A luz do Evangelho não foi dada apenas para ser admirada, mas para governar os caminhos do coração humano. O homem caído deseja uma espiritualidade sem rendição, uma comunhão sem santidade e uma religião que preserve suas próprias trevas. Contudo, o Cristo Glorioso não veio ao mundo para confirmar o domínio do pecado, mas para conduzir pecadores ao arrependimento sincero e verdadeiro. O estilo de vida revela a natureza da comunhão que professamos possuir. Onde a mentira domina os passos, a verdade não governa a alma; onde a rebelião é cultivada, a luz é rejeitada. A Palavra Viva chama a igreja não para uma aparência de piedade, mas para uma caminhada sincera diante de Deus, sob a claridade santa das Escrituras. A luz revela. A verdade confronta. Cristo permanece santo.", "oracao": "Ó Majestoso Jesus, Luz Verdadeira que sonda o coração humano, nós Te adoramos porque Tua presença desfaz toda ilusão produzida pelas trevas. Tu és santo, reto e perfeito em todos os Teus caminhos, e diante de Ti nenhuma falsidade permanece encoberta. Purifica nossos passos para que não apenas confessemos Tua verdade com os lábios, mas também andemos em harmonia com Tua Palavra Viva. Que Teu Espírito incline nossa alma ao arrependimento sincero, ao amor pela verdade e ao estilo de vida que honra o Teu nome.", "mov": 2}, {"ref": "1 João 1:7", "texto": "“Se, porém, andarmos na luz, como ele está na luz, mantemos comunhão uns com os outros, e o sangue de Jesus, seu Filho, nos purifica de todo pecado.”", "comentario": "A luz de Deus não apenas revela quem Ele é; ela transforma o caminho daqueles que pertencem ao Seu Reino. João estabelece uma profunda conexão: enquanto Deus está eternamente na luz, Seus filhos são chamados a andar nela. As palavras “Se, porém, andarmos na luz, como ele está na luz” [1 João 1:7] anunciam que a vida da igreja passa a respirar comunhão verdadeira e purificação contínua mediante o sangue de Jesus. O homem natural deseja proximidade sem rendição, comunhão sem santidade, perdão sem cruz. Mas o Cristo Glorioso conduz Seu povo pelo caminho da luz: sustentado pela Graça, firmado na verdade e purificado pelo Seu sangue precioso. A luz aproxima os redimidos uns dos outros porque primeiro os aproxima do Pai. O sangue de Jesus purifica. O orgulho perde o seu alicerce. A mentira perde sua força. E a alma encontra descanso não em sua própria justiça, mas na suficiência eterna do Salvador do Mundo. A Graça chama o pecador para a luz. A verdade sustenta a comunhão. Cristo conduz o fiel por um caminho de purificação.", "oracao": "Ó Cordeiro Imaculado de Deus, o Teu sangue eterno foi derramado para purificação do Teu povo. Nós Te adoramos porque em Ti a luz não destrói o pecador arrependido, mas o conduz à comunhão da Graça. Tu és o Cristo Glorioso que sustenta a igreja na verdade e purifica aqueles que caminham diante da Tua face. Que nosso coração abandone as sombras do orgulho e encontre descanso na suficiência do Teu sangue precioso. Firma nossos passos na Tua luz e conserva nossa alma rendida ante à beleza santa da Tua presença eterna.", "mov": 2}, {"ref": "1 João 1:8", "texto": "“Se dissermos que não temos pecado nenhum, a nós mesmos nos enganamos, e a verdade não está em nós.”", "comentario": "Uma das mais profundas marcas das trevas espirituais é fazer o homem acreditar que sua própria alma permanece imaculada diante de Deus. João desfaz essa ilusão com palavras solenes e penetrantes: “Se dissermos que não temos pecado nenhum, a nós mesmos nos enganamos, e a verdade não está em nós” [1 João 1:8]. A luz do Evangelho não apenas revela a santidade do Deus Vivo; ela também expõe a real condição do coração humano. O pecado negado não desaparece. O orgulho escondido não deixa de existir. A mentira cultivada não se transforma em verdade. O homem natural procura preservar sua própria justiça, mas a Palavra Viva remove toda falsa segurança construída longe da Graça. Somente quando a alma abandona suas máscaras diante do Cristo Glorioso é que a verdade começa a florescer com sinceridade e arrependimento. O Evangelho não humilha o pecador para destruí-lo, mas para conduzi-lo ao descanso da misericórdia soberana. A luz revela o oculto. A verdade desfaz o engano. Cristo permanece eternamente santo.", "oracao": "Ó Cristo pleno em santidade, Luz Verdadeira que sonda os lugares mais profundos do coração humano, nós Te adoramos porque diante da Tua presença toda ilusão é desfeita e toda falsa justiça perde sua força. Tu conheces nossas sombras, nossos pecados ocultos e as mentiras que tantas vezes obscurecem nossa biografia. Livra-nos do orgulho que endurece a alma e do engano que afasta o coração da comunhão contigo. Que a Tua Palavra Viva ilumine nosso interior, produza arrependimento verdadeiro e conduza nossos passos ao descanso da misericórdia que não se esgota.", "mov": 2}, {"ref": "1 João 1:9", "texto": "“Se confessarmos os nossos pecados, ele é fiel e justo para nos perdoar os pecados e nos purificar de toda injustiça.”", "comentario": "O caminho da Graça começa a florescer quando o coração deixa de esconder aquilo que Deus já vê plenamente. João anuncia uma das mais consoladoras promessas do Evangelho: “Se confessarmos os nossos pecados, ele é fiel e justo para nos perdoar os pecados e nos purificar de toda injustiça” [1 João 1:9]. A verdadeira confissão não nasce do desespero religioso, mas da luz que expõe a alma ante as evidências tenebrosas da sua impiedade e conduz o pecador ao descanso seguro na misericórdia divina. O homem natural procura suavizar suas culpas, justificar seus caminhos e renomear seus pecados. Mas a Palavra Viva chama o pecador a concordar com Deus acerca da corrupção do próprio coração. Onde não existe confissão sincera, a verdade permanece distante. Onde o pecado permanece escondido, a verdadeira comunhão se desfaz na penumbra de um coração impuro e impenitente. Mas onde a alma se curva diante do Cristo Glorioso, o perdão floresce e a purificação começa a restaurar os lugares feridos da peregrinação humana. A Graça revela o pecado. A verdade conduz ao arrependimento. O Salvador do Mundo permanece fiel para perdoar.", "oracao": "Ó Cristo misericordioso, Verbo Eterno que contempla com verdade os caminhos da alma humana, nós Te adoramos porque Tua Graça não apenas revela o pecado, mas também oferece perdão e purificação aos que se achegam a Ti com coração quebrantado. Tu conheces as culpas escondidas, as sombras silenciosas e as feridas produzidas por nossa própria rebelião. Livra-nos da dureza que tenta justificar o pecado e concede-nos sinceridade para confessar diante de Ti aquilo que tantas vezes tentamos ocultar de nós mesmos.", "mov": 2}, {"ref": "1 João 1:10", "texto": "“Se dissermos que não temos cometido pecado, fazemo-lo mentiroso, e a sua palavra não está em nós.”", "comentario": "É profunda e danosa a cegueira espiritual que, mesmo não ignorando a existência de Deus, nega a corrupção que habita no próprio coração humano. João conduz a igreja a uma afirmação solene e perturbadora: “Se dissermos que não temos cometido pecado, fazemo-lo mentiroso, e a sua palavra não está em nós” [1 João 1:10]. O homem caído procura preservar diante de si mesmo uma aparência de inocência, suavizando suas culpas e escondendo sua rebelião sob discursos enganosos e justificativas cuidadosamente construídas. Mas a Luz Verdadeira desfaz toda ilusão produzida pelo orgulho. Se Deus afirma que todos pecaram, negar a própria pecaminosidade não é apenas rejeitar a verdade sobre si mesmo; é contradizer o próprio testemunho do Deus Santo. Onde a Palavra Viva não encontra lugar, o coração se fecha em sua própria mentira. Onde a verdade é rejeitada, a alma permanece aprisionada em suas trevas. Mas quando o Cristo Glorioso rompe o engano do coração, o pecador começa finalmente a enxergar sua necessidade da Graça soberana. A verdade expõe o pecado. A luz desfaz o engano. O Cristo Glorioso opõe-Se a toda rebelião do coração humano.", "oracao": "Poderoso e Santo Jesus, Tu és a Verdade eterna que nenhuma mentira humana pode obscurecer. Nós Te adoramos porque Tua Palavra revela aquilo que tantas vezes tentamos esconder de nós mesmos. Tu conheces a profundidade da nossa corrupção, a inclinação do nosso coração ao engano e as máscaras que sustentamos diante dos homens. Livra-nos da cegueira espiritual que endurece a alma e faz-nos andar em sinceridade ante à luz da Tua presença. Que a Tua Palavra Viva encontre guarida em nosso interior, destrua toda falsa justiça e conduza nosso coração ao arrependimento verdadeiro.", "mov": 2}, {"ref": "1 João 2:1", "texto": "“Filhinhos meus, estas coisas vos escrevo para que não pequeis. Se, todavia, alguém pecar, temos Advogado junto ao Pai, Jesus Cristo, o Justo;”", "comentario": "A Graça de Deus não faz concessão ao pecado, mas também não abandona o pecador ferido em sua própria culpa. João escreve “para que não pequeis” [1 João 2:1], revelando que o caminho cristão não foi estabelecido para acomodação nas trevas, mas para uma peregrinação na luz da santidade divina. O pecado jamais deve ser tratado como rota natural para aqueles que foram alcançados pela Palavra Viva. Contudo, o apóstolo também conhece a fragilidade da alma humana e anuncia uma consoladora esperança: “Se, todavia, alguém pecar, temos Advogado junto ao Pai”. O Cristo Glorioso não apenas morreu pelos pecadores; Ele intercede eternamente por aqueles que pertencem à Graça soberana. E João faz questão de revelar a identidade desse Advogado celestial: “Jesus Cristo, o Justo”. Somente o Justo pode representar os injustos diante do Deus Santo. Somente o Cordeiro Imaculado pode sustentar o pecador arrependido diante do trono da misericórdia. A Graça confronta o pecado. A verdade conduz à santidade. Cristo intercede pelos Seus redimidos.", "oracao": "Ó Advogado Celeste, fiel testemunha junto ao Pai, nós Te adoramos porque Tua Graça não nos abandona quando nossa fraqueza revela as marcas da nossa corrupção. Tu és santo em todos os Teus caminhos, perfeito em Tua justiça e misericordioso para sustentar aqueles que se achegam a Ti com coração quebrantado. Livra-nos de tratar o pecado com leviandade e faz-nos caminhar na luz da Tua verdade com temor, sinceridade e vigilância espiritual. Que a Tua Palavra Viva fortaleça nosso coração, produza santidade verdadeira e conserve nossa esperança firmada na suficiência da Tua Graça soberana.", "mov": 3}, {"ref": "1 João 2:2", "texto": "“e ele é a propiciação pelos nossos pecados e não somente pelos nossos próprios, mas ainda pelos do mundo inteiro.”", "comentario": "O centro do Evangelho não é a capacidade do homem de aproximar-se de Deus, mas a obra do Cristo Santo que veio ao encontro de pecadores indignos. João declara que Jesus Cristo “é a propiciação pelos nossos pecados” [1 João 2:2], conduzindo a igreja ao coração da redenção realizada na cruz. A rebelião humana não produz apenas culpa; ela atrai sobre si o justo juízo do Deus Santo. O pecado ofende a santidade divina. A transgressão provoca condenação. A impiedade jamais permanece indiferente diante do trono celestial. Por isso, Cristo não veio apenas para revelar o amor de Deus, mas para satisfazer as justas exigências da Sua santidade. Ele é a propiciação pelos nossos pecados: o sacrifício perfeito por meio do qual a justiça divina foi plenamente satisfeita e a reconciliação tornou-se possível. Sobre Ele recaiu o peso da culpa. Sobre Ele foi derramada a sentença que pertencia aos pecadores. Sobre Ele convergiu o juízo que nós jamais poderíamos suportar. Assim, a cruz não é apenas demonstração de amor; é também manifestação da justiça perfeita de Deus satisfeita no Salvador do Mundo. Onde a culpa exigia condenação, a Graça proveu reconciliação. Onde havia ira, Cristo trouxe paz. Onde havia morte, o Verbo Eterno fez resplandecer a vida. A cruz revela a justiça. A cruz manifesta a Graça. A cruz exalta o Cristo Redentor.", "oracao": "Ó Santo e Imaculado Cordeiro, Tu és o Santo que carregou a culpa dos culpados, o Justo que sofreu em lugar dos injustos e o Redentor que abriu o caminho da reconciliação com o Pai. Quando contemplamos a cruz, somos lembrados da profundidade do nosso pecado e da grandeza incomparável da Tua misericórdia. Que a memória da Tua cruz sustente nossa esperança e faça florescer em nós amor sincero por Ti, ó Salvador do Mundo, digno de toda honra e adoração.", "mov": 3}, {"ref": "1 João 2:3", "texto": "“Ora, sabemos que o temos conhecido por isto: se guardamos os seus mandamentos.”", "comentario": "A fé cristã não repousa sobre impressões passageiras, mas produz evidências visíveis na vida daqueles que pertencem a Cristo. João escreve: “sabemos que o temos conhecido por isto: se guardamos os seus mandamentos” [1 João 2:3], revelando que o verdadeiro conhecimento de Deus jamais permanece confinado ao intelecto. Conhecer o Salvador do Mundo é caminhar em obediência à Sua vontade. Não se trata de uma submissão meramente exterior, nem de um esforço destinado a conquistar o favor divino, mas da resposta natural de um coração alcançado pela Graça. O homem natural deseja os benefícios de Cristo sem a rendição a Cristo. Deseja a promessa sem o senhorio. Deseja a salvação sem a obediência. Mas a Palavra Viva conduz Seus redimidos por outro caminho. Aquele que conhece o Verbo Eterno aprende a amar aquilo que Ele ama e a guardar aquilo que Ele ordena. Foi o próprio Senhor quem declarou: “Aquele que tem os meus mandamentos e os guarda, esse é o que me ama” [João 14:21]. O amor torna a obediência desejável. A obediência revela a comunhão. A comunhão testemunha a realidade da fé. A Graça transforma o coração. A verdade dirige os passos. Cristo é digno de ser obedecido.", "oracao": "Ó Senhor Santo e Fiel, nós Te adoramos porque Teus mandamentos não são um peso imposto aos redimidos, mas a expressão da Tua perfeita vontade para aqueles que Te amam. Tu és a Palavra Viva que ilumina o caminho e conduz Teu povo em segurança. Livra-nos de uma fé apenas declarada pelos lábios e faz florescer em nós a obediência que nasce da gratidão e da comunhão contigo. Que nosso coração encontre alegria em guardar Tua Palavra, firmeza em seguir Teus caminhos e contentamento em viver sob Teu governo.", "mov": 3}, {"ref": "1 João 2:4", "texto": "“Aquele que diz: Eu o conheço e não guarda os seus mandamentos é mentiroso, e nele não está a verdade.”", "comentario": "Uma das mais perigosas ilusões espirituais é confundir profissão de fé com submissão verdadeira ao senhorio de Cristo. João não permite que a igreja encontre abrigo em declarações vazias ou convicções meramente verbais. Com santa objetividade, ele afirma: “Aquele que diz: Eu o conheço e não guarda os seus mandamentos é mentiroso, e nele não está a verdade” [1 João 2:4]. O apóstolo estabelece um contraste solene entre aquilo que os lábios proclamam e aquilo que a vida testemunha. O homem natural aprende a construir aparências. O coração caído aprende a formular discursos. A religião sem transformação aprende a ocultar sua esterilidade sob palavras piedosas. Mas a Palavra Viva atravessa toda fachada e expõe aquilo que realmente habita no interior do homem. Conhecer o Salvador do Mundo não consiste apenas em afirmar Seu nome, mas em viver sob a autoridade da Sua verdade. Onde não há obediência, a profissão de fé perde sua credibilidade. Onde a verdade não governa o coração, a mentira encontra abrigo. Mas onde Cristo reina, a vida começa a refletir aquilo que os lábios confessam. A mentira produz aparência. A verdade produz transformação. Cristo traz à luz todas as coisas, o que é genuíno e o que é apenas aparência.", "oracao": "Diante de Ti, ó Sublime Cordeiro de Deus, nenhuma aparência permanece intacta e nenhum coração pode esconder sua real condição. Tu és a Palavra Viva que discerne os pensamentos mais profundos e revela aquilo que realmente somos. Concede-nos um coração íntegro, que ame a Tua verdade e encontre alegria em seguir os Teus mandamentos. Que nossa vida confirme aquilo que nossa boca proclama e que nossos caminhos testemunhem a realidade da Tua obra em nós.", "mov": 3}, {"ref": "1 João 2:5-6", "texto": "“Aquele, entretanto, que guarda a sua palavra, nele, verdadeiramente, tem sido aperfeiçoado o amor de Deus. Nisto sabemos que estamos nele: aquele que diz que permanece nele, esse deve também andar assim como ele andou.”", "comentario": "O amor de Deus alcança sua mais bela expressão quando deixa de ser apenas confessado pelos lábios e passa a moldar os caminhos da vida. João declara: “Aquele, entretanto, que guarda a sua palavra, nele, verdadeiramente, tem sido aperfeiçoado o amor de Deus” [1 João 2:5-6]. A obediência não aparece aqui como um peso imposto ao discípulo, mas como fruto da obra que a Graça realiza no coração daqueles que pertencem a Cristo. O amor divino amadurece a alma. A verdade orienta os afetos. A comunhão transforma a caminhada. Por isso, permanecer no Salvador do Mundo significa mais do que afirmar uma convicção espiritual; significa seguir os passos dAquele que nos chamou das trevas para a Sua maravilhosa luz. João une inseparavelmente permanência e imitação. Quem permanece aprende a andar. Quem anda com Cristo começa a refletir Seu caráter. Quem contempla o Cristo Glorioso passa a desejar aquilo que agrada ao Seu Senhor. A fé não permanece estéril. O amor não permanece inativo. A Graça não permanece sem fruto. O amor amadurece na obediência. A caminhada revela a comunhão. Cristo permanece o perfeito modelo dos Seus redimidos.", "oracao": "Ó Verbo Eterno, perfeita revelação do Pai e modelo santo para todos os que Te seguem, nós Te bendizemos porque não apenas nos chamaste para a comunhão contigo, mas também nos mostraste o caminho por onde devemos andar. Teu amor transforma os afetos da alma e conduz os redimidos a uma obediência que nasce da gratidão e da reverência. Livra-nos de uma fé apenas declarada e forma em nosso coração o desejo sincero de refletir Tua verdade em cada aspecto da vida.", "mov": 3}, {"ref": "1 João 2:7", "texto": "“Amados, não vos escrevo mandamento novo, senão mandamento antigo, o qual, desde o princípio, tivestes. Esse mandamento antigo é a palavra que ouvistes.”", "comentario": "Existe uma permanente tentação no coração humano de procurar novidade onde Deus já concedeu plenitude. João escreve à igreja para recordar uma verdade fundamental: o caminho da vida não depende de novas revelações, mas da permanência na Palavra recebida desde o princípio. Por isso o apóstolo afirma: “não vos escrevo mandamento novo, senão mandamento antigo” [1 João 2:7]. O mandamento não era desconhecido dos discípulos. Não havia sido recentemente descoberto. Não surgira de uma inovação espiritual ou de uma nova proposta religiosa. Era a mesma palavra que haviam ouvido desde o início da sua peregrinação com Cristo. O Evangelho não necessita de acréscimos para conservar seu poder. A verdade não envelhece. A Graça não perde sua força. A voz do Verbo Eterno não necessita ser substituída pelas novidades de cada geração. Aquilo que procede de Deus permanece firme através dos séculos. O coração inquieto busca novidades. A alma madura aprende a permanecer. O discípulo fiel encontra descanso naquilo que ouviu do Senhor. A Palavra permanece. A verdade sustenta. Cristo continua sendo suficiente.", "oracao": "Pai Eterno, fonte de toda verdade imutável, nós Te adoramos porque não nos deixaste entregues às incertezas deste mundo, mas nos revelaste em Teu Filho amado a Palavra que permanece para sempre. Tu és fiel em todas as Tuas promessas, constante em Teus caminhos e perfeito em Tua sabedoria. Guarda nosso coração da inquietação que vive buscando novidades quando já recebemos a plenitude da Tua revelação. Concede-nos humildade para permanecer firmes na verdade que ouvimos desde o princípio e discernimento para reconhecer a voz do Verbo Eterno acima de todas as demais vozes.", "mov": 3}, {"ref": "1 João 2:8", "texto": "“Todavia, vos escrevo novo mandamento, aquilo que é verdadeiro nele e em vós, porque as trevas se vão dissipando, e a verdadeira luz já brilha.”", "comentario": "Há verdades tão antigas quanto a própria revelação de Deus e, ao mesmo tempo, tão vivas que jamais deixam de parecer novas. João acaba de recordar à igreja o mandamento recebido desde o princípio, mas agora afirma: “vos escrevo novo mandamento” [1 João 2:8]. A novidade não está em uma mensagem diferente, mas na manifestação gloriosa daquilo que se tornou plenamente visível em Cristo. O amor que outrora foi anunciado encontrou sua expressão perfeita no Salvador do Mundo. Aquilo que era promessa tornou-se realidade. Aquilo que era sombra encontrou seu cumprimento. Aquilo que era aguardado resplandeceu na pessoa do Cristo Glorioso. Por isso João afirma que esse mandamento é verdadeiro “nele e em vós”. O que brilhou perfeitamente em Cristo começa agora a refletir-se na vida daqueles que permanecem nEle. As trevas não governam para sempre. O pecado não possui a palavra final. A noite já começou a recuar diante da Luz Verdadeira. A história caminha para a plenitude do Reino. A alma encontra esperança nessa certeza. As trevas se dissipam. A luz já resplandece. Cristo conduz Seu povo para a glória.", "oracao": "Ó Luz Verdadeira, resplendor eterno do Pai e perfeita revelação da Graça infinita, nós Te adoramos porque vieste ao mundo para dissipar as trevas e manifestar a plenitude da verdade divina. Em Ti contemplamos o amor que foi prometido, anunciado e finalmente revelado em toda a sua beleza. Faz-nos viver à luz daquilo que já realizaste e da esperança daquilo que ainda consumarás. Que a Tua presença ilumine nossos pensamentos, governe nossos afetos e fortaleça nossa perseverança até o dia em que toda escuridão será definitivamente vencida diante da glória do Teu nome.", "mov": 3}, {"ref": "1 João 2:9-10", "texto": "“Aquele que diz estar na luz e odeia a seu irmão, até agora, está nas trevas. Aquele que ama a seu irmão permanece na luz, e nele não há nenhum tropeço.”", "comentario": "Há uma contradição que a luz de Cristo jamais permite permanecer oculta: professar comunhão com Deus enquanto se alimenta o desprezo pelo irmão. João apresenta um contraste solene entre duas realidades espirituais incompatíveis. “Aquele que diz estar na luz e odeia a seu irmão, até agora, está nas trevas” [1 João 2:9-10]. A luz não se manifesta apenas nas palavras que confessamos, mas nos afetos que cultivamos e nos vínculos que preservamos. O ódio obscurece o discernimento. O ressentimento perturba a caminhada. A amargura transforma o coração em território favorável às sombras. Em contraste, aquele que ama permanece na luz. Não porque o amor o salva, mas porque o amor testemunha a presença da Luz Verdadeira operando em sua vida. Quem vive na luz aprende a enxergar com clareza. Quem permanece na luz discerne seus passos. Quem caminha na luz encontra segurança no caminho. O amor fraterno não é mero sentimento passageiro; é fruto da obra do Cristo Glorioso entre os Seus redimidos. As trevas confundem. O amor ilumina. A Luz Verdadeira conduz o Seu povo com segurança.", "oracao": "Ó Cristo, Luz Verdadeira que dissipa as sombras do coração humano, em Ti contemplamos o amor perfeito que procede do Pai e alcança pecadores pela Tua Graça. Tu não apenas nos chamaste para a comunhão contigo, mas também nos uniste a um povo redimido para viver sob a luz da Tua presença. Livra-nos de todo ressentimento que obscurece a alma, de toda amargura que enfraquece a comunhão e de toda dureza que resiste ao amor que Tu produzes em Teus filhos. Faz-nos permanecer na luz da Tua verdade, amando como fomos amados e servindo como fomos alcançados pela Tua misericórdia.", "mov": 3}, {"ref": "1 João 2:11", "texto": "“Aquele, porém, que odeia a seu irmão está nas trevas, e anda nas trevas, e não sabe para onde vai, porque as trevas lhe cegaram os olhos.”", "comentario": "Poucas ilusões são tão perigosas quanto acreditar que se enxerga claramente enquanto se caminha em meio às trevas. João conduz a igreja a uma advertência solene: “Aquele, porém, que odeia a seu irmão está nas trevas, e anda nas trevas, e não sabe para onde vai” [1 João 2:11]. O apóstolo não descreve apenas uma falha moral ou uma emoção descontrolada. Ele revela uma condição espiritual. O ódio não permanece isolado no interior do coração. Ele obscurece o discernimento, confunde os caminhos e aprisiona a alma em uma cegueira que a impede de perceber sua própria condição. Quem habita nas trevas pensa enxergar. Quem anda nas trevas imagina saber para onde vai. Quem permanece nas trevas desconhece o perigo que o cerca. Esta é a tragédia descrita por João: “as trevas lhe cegaram os olhos”. Em contraste, a Luz Verdadeira concede visão, direção e segurança aos que permanecem em Cristo. O amor não apenas testemunha a presença da luz; ele é também fruto da visão restaurada pela Graça. Onde Cristo reina, os olhos começam a enxergar. Onde Sua luz resplandece, o caminho se torna evidente. As trevas cegam. O amor ilumina. A Luz Verdadeira conduz à vida.", "oracao": "Ó Cristo, Eterna voz celestial que revela os caminhos ocultos e dissipa a cegueira produzida pelas trevas, nós Te adoramos porque somente em Tua presença a alma encontra direção segura e discernimento verdadeiro. Tu conheces os ressentimentos que tentam criar raízes e as sombras que procuram obscurecer nosso coração. Concede-nos olhos iluminados pela Tua Graça, para que vejamos com clareza os Teus caminhos e andemos em conformidade com a Tua verdade. Que a Tua luz governe nossos pensamentos, purifique nossas ações e fortaleça nossa caminhada, até que toda sombra seja vencida pelo resplendor da Tua santa presença.", "mov": 3}, {"ref": "1 João 2:12", "texto": "“Filhinhos, eu vos escrevo, porque os vossos pecados são perdoados, por causa do seu nome.”", "comentario": "Uma das mais profundas consolações do Evangelho é que a paz com Deus não repousa sobre aquilo que fizemos, mas sobre aquilo que Cristo realizou em nosso favor. João dirige-se aos crentes com ternura pastoral e lhes recorda uma realidade já estabelecida: “os vossos pecados são perdoados, por causa do seu nome” [1 João 2:12]. Não se trata de uma esperança incerta nem de uma possibilidade futura, mas de uma declaração consumada pela obra redentora do Salvador do Mundo. O pecado produzia culpa. A culpa exigia condenação. A condenação separava o homem do Deus Santo. Contudo, aquilo que jamais poderíamos remover por nossos próprios esforços foi levado pelo Cordeiro Imaculado de Deus em Sua cruz. O perdão não nasce dos méritos humanos, mas da autoridade do nome de Jesus e da eficácia do Seu sangue derramado em favor dos pecadores. Por isso, a alma redimida encontra descanso não em sua própria justiça, mas na suficiência do Cristo Glorioso. A consciência é libertada. A culpa perde sua acusação. A esperança volta a florescer. O nome de Jesus permanece poderoso para salvar. A Graça conduz ao perdão. A cruz proclama reconciliação. Cristo é a nossa paz.", "oracao": "Ó Redentor bendito, cujo nome é precioso acima de todo nome e cuja obra perfeita alcançou pecadores indignos, a Ti rendemos nossa gratidão e adoração. Teu sangue vertido na cruz desfez o poder da culpa que nos condenava e abriu o caminho da reconciliação com o Pai. Livra-nos de confiar em nossa própria justiça e ensina-nos a descansar na Graça que nos foi concedida por Teu favor imerecido. Que a alegria do perdão sustente nossa caminhada, fortaleça nossa fé e faça transbordar em nós sincera gratidão ao Redentor que nos amou e Se entregou por nós.", "mov": 3}, {"ref": "1 João 2:13", "texto": "“Pais, eu vos escrevo, porque conheceis aquele que existe desde o princípio. Jovens, eu vos escrevo, porque tendes vencido o Maligno.”", "comentario": "A beleza da vida cristã não se manifesta apenas no seu começo, mas também na obra que a Graça continua realizando ao longo da caminhada. João dirige-se a diferentes grupos da igreja e celebra evidências da atuação de Deus em Seu povo. Aos pais, ele escreve: “porque conheceis aquele que existe desde o princípio” [1 João 2:13]. João não os destaca por causa da idade, mas pela maturidade adquirida na comunhão com o Verbo Eterno. O sinal da verdadeira maturidade espiritual não é o acúmulo de informações religiosas, mas o conhecimento profundo e perseverante de Cristo. Quanto mais o discípulo caminha com Cristo, mais aprende a contemplar Sua glória, descansar em Sua suficiência e confiar em Sua fidelidade. Aos jovens, João escreve: “porque tendes vencido o Maligno”. Aqui o apóstolo destaca aqueles cuja fé se manifesta em vigor espiritual e perseverança na batalha. A vida cristã não é apenas contemplação; é também combate. Existe oposição. Existe batalha. Existe resistência espiritual. Contudo, aqueles que permanecem unidos ao Cristo Glorioso participam da vitória que Ele mesmo conquistou. Os pais conhecem o Senhor. Os jovens vencem o inimigo. Em ambos resplandece a obra da Graça soberana. A maturidade contempla Cristo. A perseverança enfrenta o Maligno. O Salvador do Mundo sustenta os Seus em cada etapa da jornada. Conhecer Cristo é riqueza verdadeira. Vencer o Maligno é Graça concedida. Cristo permanece vitorioso.", "oracao": "Ó Verbo Eterno, que existes desde o princípio e reinas soberano sobre todas as coisas, nós Te bendizemos porque és a fonte da verdadeira sabedoria e a fortaleza daqueles que pertencem ao Teu Reino. Concede-nos a Graça de Te conhecer com maior profundidade e contemplemos com mais clareza a beleza da Tua glória. Fortalece-nos também contra as investidas do Maligno, lembrando-nos que a vitória pertence Àquele que venceu o mundo.", "mov": 3}, {"ref": "1 João 2:14", "texto": "“Filhinhos, eu vos escrevi, porque conheceis o Pai. Pais, eu vos escrevi, porque conheceis aquele que existe desde o princípio. Jovens, eu vos escrevi, porque sois fortes, e a palavra de Deus permanece em vós, e tendes vencido o Maligno.”", "comentario": "A maturidade cristã não é medida pelos anos vividos, mas pela obra da Graça evidenciada na comunhão, na perseverança e no conhecimento de Deus. João contempla a igreja e reconhece nela diferentes expressões dessa mesma obra divina. Aos filhinhos, ele escreve: “porque conheceis o Pai” [1 João 2:14]. Esta é a bênção fundamental da salvação: pecadores reconciliados foram recebidos na família de Deus e agora O conhecem como Pai. Aos pais, João escreve: “porque conheceis aquele que existe desde o princípio”. Aqui resplandece a marca da maturidade espiritual. O discípulo amadurecido aprende a contemplar mais profundamente o Verbo Eterno, Aquele que permanece imutável através dos séculos. Aos jovens, o apóstolo declara: “sois fortes, e a palavra de Deus permanece em vós, e tendes vencido o Maligno”. Sua força não nasce da capacidade humana, mas da Palavra Viva habitando abundantemente no coração. A Palavra permanece. A força é concedida. O Maligno é vencido. Assim, João descreve uma igreja firmada na Graça, amadurecida no conhecimento e fortalecida para a batalha espiritual. Conhecer o Pai é um privilégio para os filhos de Deus. Conhecer Cristo em profundidade é uma dádiva concedida aos que amadurecem na fé. Permanecer na Palavra é o seguro caminho da vitória.", "oracao": "Ó Pai Eterno, que nos recebeste em Tua família por meio do Teu Filho amado, nós Te bendizemos porque nos deste o privilégio de Te conhecer com um coração transformado. Tu nos revelaste o Verbo Eterno, que existe desde o princípio, e nos sustentaste pela Palavra que permanece para sempre. Que a verdade governe nossos pensamentos, a Graça molde nossos afetos e a esperança sustente nossa caminhada. Conserva-nos firmes até o fim, sustentados por Tua Palavra, perseverantes na fé e vitoriosos sobre todo engano do Maligno.", "mov": 3}, {"ref": "1 João 2:15", "texto": "“Não ameis o mundo nem as coisas que há no mundo. Se alguém amar o mundo, o amor do Pai não está nele;”", "comentario": "O coração humano foi criado para amar, mas a direção desse amor determina o rumo de toda a existência. João apresenta uma advertência solene: “Não ameis o mundo nem as coisas que há no mundo” [1 João 2:15]. O apóstolo não condena a criação de Deus nem a vida neste mundo, mas o sistema de valores que se organiza à margem do seu Criador e resiste ao Seu governo. O problema não está apenas nas coisas que seduzem os olhos ou despertam os desejos do coração. O problema está naquilo que passa a ocupar o lugar que pertence ao Pai. Ninguém vive sem amar alguma coisa. Ninguém caminha sem servir a algum senhor. Ninguém entrega o coração ao vazio. Por isso João declara: “Se alguém amar o mundo, o amor do Pai não está nele”. O amor ao mundo não é a causa da ausência do amor do Pai; é sua evidência. Somente aqueles que foram alcançados pela graça aprendem a amar aquilo que Deus ama e a desejar aquilo que glorifica o Seu nome. O mundo promete satisfação. O amor do Pai concede vida. O mundo passa. A Graça permanece. Cristo é infinitamente melhor.", "oracao": "Glorioso e Eterno Pai Celestial, fonte de todo amor verdadeiro e de toda boa dádiva, nós Te louvamos porque nos amaste antes que pudéssemos responder ao Teu chamado. Teu amor nos encontrou em nossa rebelião, nos atraiu para Ti e revelou a beleza do Salvador do Mundo. Guarda nosso coração das afeições desordenadas que procuram ocupar o lugar que pertence somente a Ti. Que Teu amor governe nossos desejos, oriente nossas escolhas e fortaleça nossa fidelidade, pois somente em Ti o coração encontra descanso seguro e alegria permanente.", "mov": 3}, {"ref": "1 João 2:16", "texto": "“porque tudo que há no mundo, a concupiscência da carne, a concupiscência dos olhos e a soberba da vida, não procede do Pai, mas procede do mundo.”", "comentario": "Nem tudo o que seduz o coração possui sua origem em Deus. João conduz a igreja a discernir a verdadeira procedência dos afetos que disputam o governo da alma. Ele declara que “a concupiscência da carne, a concupiscência dos olhos e a soberba da vida” [1 João 2:16] não procedem do Pai, mas do mundo. O apóstolo não está descrevendo apenas pecados isolados, mas uma disposição espiritual que se opõe ao governo de Deus. A concupiscência da carne busca satisfazer desejos desordenados. A concupiscência dos olhos transforma o olhar em instrumento de cobiça. A soberba da vida exalta o homem e obscurece sua dependência do Criador. Tudo isso pertence ao mundo porque nasce de uma ordem de valores afastada do Pai. O coração caído é facilmente atraído por essas promessas. A carne deseja possuir. Os olhos desejam acumular. O orgulho deseja exaltar-se. Mas a Graça revela uma realidade superior. O amor do Pai conduz a alma para aquilo que é eterno. O Verbo Eterno liberta dos enganos que escravizam. O Salvador do Mundo oferece uma alegria que não depende das ilusões passageiras deste século. A cobiça nunca se satisfaz. O orgulho nunca encontra descanso. O amor do Pai conduz à verdadeira vida.", "oracao": "Majestoso e Soberano Deus, diante de Ti reconhecemos que muitas vezes nosso coração é atraído por desejos que não procedem da Tua santa vontade. Tu és a fonte de todo dom perfeito, e em Ti não há variação nem sombra de mudança. Guarda-nos das seduções que alimentam a carne, da cobiça que nasce dos olhos e do orgulho que procura ocupar o lugar que pertence somente a Ti. Que Teu amor governe nossos afetos, purifique nossos desejos e ensine nossa alma a encontrar contentamento em Tua presença.", "mov": 3}, {"ref": "1 João 2:17", "texto": "“Ora, o mundo passa, bem como a sua concupiscência; aquele, porém, que faz a vontade de Deus permanece eternamente.”", "comentario": "Um dos contrastes mais decisivos da existência humana não está entre riqueza e pobreza, força e fraqueza, sucesso e fracasso, mas entre aquilo que passa e aquilo que permanece. João conduz a igreja a contemplar essa realidade com santa sobriedade: “o mundo passa, bem como a sua concupiscência” [1 João 2:17]. Tudo aquilo que procede do mundo compartilha da mesma fragilidade da sua origem. Seus desejos são transitórios. Suas promessas são passageiras. Suas glórias são efêmeras. A concupiscência que seduz o coração humano não possui substância eterna porque nasce de uma ordem destinada ao desaparecimento. O que hoje fascina os olhos amanhã será esquecido. O que hoje alimenta a vaidade amanhã se desfará como névoa ao amanhecer. Mas João não encerra sua reflexão na transitoriedade do mundo. Ele volta os olhos da igreja para aquilo que permanece: “aquele, porém, que faz a vontade de Deus permanece eternamente”. Não se trata de uma permanência produzida pelo mérito humano, mas da participação na vida eterna concedida por Deus àqueles que pertencem ao Seu Filho. O mundo caminha para o fim. A vontade de Deus permanece para sempre. O Verbo Eterno conduz Seus redimidos para a realidade que jamais será abalada. O transitório desaparece. O eterno permanece. Cristo é a vida que não tem fim.", "oracao": "Sublime e Eterno Deus, Tu és o mesmo ontem, hoje e para sempre, perfeito em Tua santidade e imutável em Teus propósitos. Ensina-nos a não firmar o coração naquilo que é passageiro, nem a depositar nossa esperança nas promessas frágeis deste século. Que a Tua vontade seja preciosa aos nossos olhos, mais desejável que os tesouros da terra e mais firme que todas as seguranças deste mundo. Sustenta-nos por Tua Graça para que jamais nos esqueçamos que nossa vida está segura em Ti.", "mov": 3}, {"ref": "1 João 2:18", "texto": "“Filhinhos, já é a última hora; e, como ouvistes que vem o anticristo, também, agora, muitos anticristos têm surgido; pelo que conhecemos que é a última hora.”", "comentario": "Uma das marcas da última hora não é a mera indiferença espiritual, mas o surgimento de vozes que procuram afastar o coração humano da verdade acerca de Cristo e mantê-lo ocupado com aquilo que se opõe à Sua santa vontade. João recorda à igreja um ensino já conhecido: “como ouvistes que vem o anticristo, também, agora, muitos anticristos têm surgido” [1 João 2:18]. O apóstolo não aponta apenas para um acontecimento futuro, mas para uma realidade já presente em seus dias. A oposição ao Reino de Deus não se manifesta apenas por meio da perseguição aberta; ela também se revela através do erro doutrinário que distorce a verdade e procura afastar os homens do Verbo Eterno. Por isso João afirma que a presença desses anticristos confirma que já “é a última hora”. Os últimos dias não aguardam seu início. Eles já começaram com a vinda, morte, ressurreição e exaltação do Cristo Glorioso. A igreja vive entre a primeira e a segunda vinda do Salvador do Mundo. A mentira continua a surgir. O engano continua a se multiplicar. A oposição continua a se manifestar. Contudo, a verdade permanece. O Evangelho permanece. O Reino permanece. A última hora já se instalou, e a verdadeira segurança do coração continua sendo render-se ao senhorio de Cristo.", "oracao": "Maravilhoso e Soberano Jesus, Tu és o Senhor da história, por isso, nós Te bendizemos porque nenhum acontecimento escapa ao Teu governo soberano. Tu conheces os tempos, os propósitos eternos e os conflitos que cercam a Tua igreja neste mundo. Guarda-nos do engano que procura obscurecer a verdade e fortalece nosso coração para permanecermos firmes na Palavra Viva. Concede-nos discernimento para reconhecer a Tua voz em meio às muitas vozes que disputam nossa atenção. Que nossa fé permaneça ancorada em Teu Evangelho, nossa esperança firmada em Tua promessa e nossa vida orientada por Tua verdade.", "mov": 4}, {"ref": "1 João 2:19", "texto": "“Eles saíram de nosso meio; entretanto, não eram dos nossos; porque, se tivessem sido dos nossos, teriam permanecido conosco; todavia, eles se foram para que ficasse manifesto que nenhum deles é dos nossos.”", "comentario": "O fato de estar fisicamente presente com o povo de Deus pode não representar comunhão verdadeira. João contempla uma dolorosa realidade vivida pela igreja: pessoas que estiveram entre os irmãos abandonaram a comunhão e passaram a caminhar em oposição à verdade que antes professavam. Por isso ele afirma: “Eles saíram de nosso meio” [1 João 2:19]. O apóstolo não está descrevendo uma simples mudança de convivência ou uma transferência entre comunidades. Ele está tratando da ruptura produzida pelo abandono da verdade acerca de Cristo. A saída daqueles homens tornou manifesta uma realidade que antes permanecia oculta. A permanência autêntica não cria a comunhão; ela a evidencia. A convivência entre irmãos não produz a verdade; ela testemunha sua presença. A participação na vida da igreja não salva não salva; ela revela a obra da Graça sustentando o coração. A igreja visível pode reunir pessoas próximas umas das outras. Somente o Cristo Glorioso une homens e mulheres à comunhão que procede do Pai. Por isso João não convida seus leitores ao medo, mas ao discernimento. A verdade permanece. A comunhão permanece. O Evangelho permanece. Onde o Verbo Eterno é amado e confessado, a fé persevera. Onde Cristo é exaltado, a comunhão encontra seu fundamento seguro.", "oracao": "Ó Soberano e Eterno Jesus, fundamento inabalável da Tua igreja e guardião fiel daqueles que pertencem ao Teu Reino, nós Te bendizemos porque Tua verdade permanece e o Teu amor dura para sempre. Conserva-nos firmados na verdade revelada em Tua Palavra Viva e guarda-nos de todo engano que procura enfraquecer nossa comunhão contigo. Que nosso amor por Ti não seja superficial ou passageiro, mas profundamente enraizado em Tua Graça e em Teu Evangelho. Em Ti encontramos segurança. Em Ti encontramos vida. Em Ti encontramos a esperança que jamais será abalada.", "mov": 4}, {"ref": "1 João 2:20-21", "texto": "“E vós possuís unção que vem do Santo e todos tendes conhecimento. Não vos escrevi porque não saibais a verdade; antes, porque a sabeis, e porque mentira alguma jamais procede da verdade.”", "comentario": "Em tempos de confusão espiritual, a segurança da igreja não repousa na capacidade humana de descobrir a verdade, mas na Graça de Deus que a revela e a preserva no coração dos Seus filhos. João lembra aos seus leitores: “possuís unção que vem do Santo” [1 João 2:20]. Essa unção não é um privilégio reservado a poucos nem um instrumento de exaltação pessoal. Ela procede do alto e capacita o povo de Deus a reconhecer a verdade revelada em Cristo. Por isso o apóstolo não escreve como quem entrega um conhecimento inédito, mas como quem fortalece convicções já recebidas: “Não vos escrevi porque não saibais a verdade; antes, porque a sabeis” [1 João 2:21]. A verdade não precisa ser reinventada. A verdade não precisa ser aperfeiçoada. A verdade não precisa ser substituída. Ela foi revelada no Verbo Eterno e confirmada pelo testemunho apostólico. Onde a verdade habita, a mentira é desmascarada. Onde a Luz Verdadeira resplandece, o engano perde sua força. Onde o Cristo Glorioso é conhecido, o coração encontra firmeza para permanecer fiel. A unção conduz ao discernimento. A verdade sustenta a fé. Cristo permanece eternamente digno de confiança.", "oracao": "Ó Santo Redentor, em Ti reside a fonte de toda verdade que transforma e de toda a Graça que salva o Teu povo. Tu és a Luz Verdadeira que dissipa a mentira e o Verbo Eterno em quem toda verdade encontra sua perfeita expressão. Fortalece em nós, ó Cordeiro Eterno, o amor pela verdade revelado em Teu Evangelho. Que Tua Palavra Viva governe nossos pensamentos, ilumine nosso discernimento e sustente nossa fidelidade em meio às pressões deste século. Faz-nos permanecer firmes naquilo que aprendemos de Ti, encontrando descanso em Tua verdade e segurança em Tua Graça.", "mov": 4}, {"ref": "1 João 2:22-23", "texto": "“Quem é o mentiroso, senão aquele que nega que Jesus é o Cristo? Este é o anticristo, o que nega o Pai e o Filho. Todo aquele que nega o Filho, esse não tem o Pai; aquele que confessa o Filho tem igualmente o Pai.”", "comentario": "A mentira mais profunda não é aquela que distorce circunstâncias passageiras, mas aquela que rejeita a verdade revelada por Deus acerca do Seu próprio Filho. João conduz a igreja ao centro do conflito espiritual que atravessa sua carta: “Quem é o mentiroso, senão aquele que nega que Jesus é o Cristo?” [1 João 2:22]. O apóstolo não trata a identidade de Jesus como um detalhe secundário da fé, mas como o fundamento sobre o qual repousa toda verdadeira comunhão com Deus. Negar que Jesus é o Messias Prometido, o Filho enviado pelo Pai e o Salvador do Mundo, não é apenas um erro doutrinário. É uma rejeição do testemunho divino. É por isso que João afirma: “Todo aquele que nega o Filho, esse não tem o Pai”. Não existe comunhão autêntica com Deus à margem de Cristo. Não existe conhecimento verdadeiro do Pai separado do Filho. Não existe adoração legítima que rejeite Aquele que o Pai enviou ao mundo. A mentira separa. A negação afasta. A incredulidade obscurece. Em contraste, aquele que confessa o Filho participa da comunhão que procede do Pai e encontra descanso na verdade revelada pelo Verbo Eterno. Confessar Cristo é abraçar a verdade. Conhecer o Filho é conhecer o Pai. Cristo é o caminho da comunhão eterna.", "oracao": "Quão glorioso é estar contigo, ó Salvador Eterno! Nós Te adoramos porque em Ti a verdade do Pai foi plenamente revelada. Tu és o Filho amado, enviado para manifestar a Graça, a verdade e a vida eterna aos pecadores. Ó Sublime Cordeiro, que a Tua Palavra Viva ilumine nosso entendimento, sustente nossa esperança e preserve nossa comunhão contigo. Nós encontramos em Ti, ó Filho Eterno do Pai, o caminho seguro para os braços do Pai e para a vida eterna. Seja exaltado para sempre o Teu glorioso nome, ó Maravilhoso Jesus, pois Tu és digno de toda honra, glória e louvor.", "mov": 4}, {"ref": "1 João 2:24", "texto": "“Permaneça em vós o que ouvistes desde o princípio. Se em vós permanecer o que desde o princípio ouvistes, também permanecereis vós no Filho e no Pai.”", "comentario": "A perseverança cristã não floresce na busca incessante por novidades, mas na permanência fiel na verdade já recebida. João dirige à igreja uma exortação simples e profunda: “Permaneça em vós o que ouvistes desde o princípio” [1 João 2:24]. Em meio às vozes que procuravam corromper o testemunho apostólico acerca de Cristo, o apóstolo não apresenta uma nova revelação nem um caminho alternativo. Ele conduz os crentes de volta à mensagem que ouviram desde o início. A segurança da fé não repousa em novidades trazidas pelo braço humano, mas na fidelidade ao Evangelho do Verbo Eterno. A verdade recebida deve permanecer no coração. A Palavra Viva deve habitar na alma. O testemunho apostólico deve governar a fé. Por isso João estabelece uma conexão inseparável entre a permanência na verdade e a permanência na comunhão com Deus: “também permanecereis vós no Filho e no Pai” [1 João 2:24]. Conduto, o mundo oferece inúmeras vozes e o coração pode facilmente se dispersar. O erro procura caminhos sutis. Mas aquele que permanece na verdade revelada encontra firmeza no Cristo Glorioso e comunhão duradoura com o Pai. A verdade é imutável. A comunhão, indispensável. Cristo permanece fiel eternamente.", "oracao": "Ó Verbo Eterno, Palavra Viva que sustenta a fé, Tu és o fundamento da nossa jornada, a revelação perfeita do Pai e a esperança que não se desfaz diante das mudanças deste mundo. Que Tua Palavra habite abundantemente em nossa mente, governe nossos afetos e fortaleça nossa perseverança. Faz-nos permanecer firmados em Ti, encontrando descanso em Tua verdade e alegria em Tua presença. Recebe nossa devoção, ó Cristo Glorioso, e conserva-nos em comunhão contigo e com o Pai pelos séculos dos séculos.", "mov": 4}, {"ref": "1 João 2:25-26", "texto": "“E esta é a promessa que ele mesmo nos fez, a vida eterna. Isto que vos acabo de escrever é acerca dos que vos procuram enganar.”", "comentario": "Um ponto crucial da vida cristã não está na distinção entre informação e ignorância, mas na compreensão de que os enganos do mundo procuram desviar o coração humano das promessas de Deus. Depois de advertir a igreja acerca dos anticristos e da necessidade de permanecer na verdade recebida desde o princípio, João conduz seus leitores ao destino glorioso dessa permanência: “esta é a promessa que ele mesmo nos fez, a vida eterna” [1 João 2:25]. A esperança cristã não repousa na busca pelo bem-estar nesta vida, mas no anelo constante pela promessa da vida eterna. O Verbo morreu para dar a vida. Ressuscitou para garanti-la. Voltará para consumá-la. Porém, o apóstolo imediatamente recorda a existência daqueles que procuram enganar os discípulos. O erro sempre procura substituir a promessa divina por algo que é efêmero. O engano oferece atalhos. A verdade, porém, conduz à vida. A mentira produz confusão. A promessa, por outro lado, produz esperança. Em meio às muitas vozes deste século, a igreja não é sustentada pelo fascínio da novidade, mas pela certeza daquilo que Deus já declarou. A promessa permanece. O engano será desfeito. Cristo é a própria vida eterna.", "oracao": "Ó Cristo Glorioso, autor da promessa que jamais falha e fonte da vida eterna concedida a todo aquele que crê. Guarda o nosso coração das mentiras que obscurecem a verdade e das seduções que procuram afastar nossa esperança da Tua promessa da vida eterna. Que a Tua Graça, ó Imaculado Cordeiro de Deus, fortaleça nossa fé, sustente nossa perseverança e conserve nossos olhos voltados para a vida que Tu preparaste para o Teu povo.", "mov": 4}, {"ref": "1 João 2:27", "texto": "“Quanto a vós outros, a unção que dele recebestes permanece em vós, e não tendes necessidade de que alguém vos ensine; mas, como a sua unção vos ensina a respeito de todas as coisas, e é verdadeira, e não é falsa, permanecei nele, como também ela vos ensinou.”", "comentario": "Nem toda voz que reivindica autoridade conduz à verdade; por isso a segurança da igreja repousa na unção que permanece e conduz o povo de Deus a permanecer no Cristo Glorioso. João recorda aos crentes que “a unção que dele recebestes permanece em vós” [1 João 2:27]. Essa unção não é uma experiência passageira nem um privilégio reservado a alguns poucos. Ela descreve a ação contínua do Espírito Santo conduzindo os filhos de Deus à verdade revelada em Cristo. Quando o apóstolo afirma que eles não tinham necessidade de que alguém os ensinasse, não está desprezando o ensino cristão, pois ele próprio os estava instruindo por meio desta carta. Sua preocupação era outra: os discípulos não precisavam de uma suposta revelação superior oferecida pelos enganadores. Tudo quanto era necessário para reconhecer a verdade acerca do Filho já lhes havia sido concedido. Por isso a unção os ensina “a respeito de todas as coisas” [1 João 2:27], não no sentido de conhecimento ilimitado, mas de discernimento suficiente para permanecer fiéis ao Evangelho recebido desde o princípio. O Espírito aponta para Cristo. A verdade conduz a Cristo. A comunhão encontra seu fundamento em Cristo. O erro confunde. A unção preserva. Cristo permanece fiel.", "oracao": "Que segurança nós temos, ó Bendito Espírito de Deus, pois Tu habitas em nossos corações. Tu és Aquele que ilumina a mente, fortalece a fé e preserva a igreja na verdade do Evangelho. Que a unção que recebemos de Ti produza em nós humildade para aprender, fidelidade para permanecer e sabedoria para discernir. Conserva nosso coração firmado na verdade recebida desde o princípio, para que nossa esperança permaneça ancorada no Salvador do Mundo e nossa vida reflita a beleza da Tua obra em nós.", "mov": 4}, {"ref": "1 João 2:28", "texto": "“Filhinhos, agora, pois, permanecei nele, para que, quando ele se manifestar, tenhamos confiança e dele não nos afastemos envergonhados na sua vinda.”", "comentario": "A perseverança cristã não é sustentada apenas pela memória do que Cristo fez no passado, mas também pela esperança daquilo que Ele ainda fará quando se manifestar em glória. João exorta a igreja: “permanecei nele” [1 João 2:28]. Essa convocação nasce de uma realidade concreta. Os discípulos estavam cercados por vozes enganosas, pressões espirituais e tentações capazes de enfraquecer sua fidelidade ao Evangelho. O coração humano pode vacilar. As adversidades podem desgastar. O erro pode seduzir. Contudo, o apóstolo dirige os olhos da igreja para o Cristo Glorioso que voltará. Permanecer em Cristo não é apenas uma disciplina da fé; é a preparação da alma para o encontro com o Salvador do Mundo. João afirma que aqueles que perseveram poderão contemplar Sua manifestação com confiança e não com vergonha. A esperança cristã não repousa apenas na preservação durante a jornada, mas na alegria do encontro final com Aquele que nos amou e Se entregou por nós. O Verbo Eterno virá. O Reino será plenamente revelado. A fé dará lugar à visão. O coração perseverante aguarda esse dia com santa expectativa. A esperança fortalece. A perseverança confirma. Cristo voltará em glória.", "oracao": "Nós Te adoramos, ó Cristo Soberano, porque Tu és fiel em todas as Tuas promessas e o Teu retorno é o poderoso sustento da nossa esperança. Fomos chamados para permanecer em Ti enquanto aguardamos o dia da Tua manifestação. Quando o caminho parecer longo e as adversidades procurarem enfraquecer nossa confiança, sustenta-nos por Tua Graça e conserva nossos olhos voltados para a glória que há de ser revelada. Que nossa fé permaneça firme, nosso amor permaneça vivo e nossa esperança permaneça inabalável.", "mov": 4}, {"ref": "1 João 2:29", "texto": "“Se sabeis que ele é justo, reconhecei também que todo aquele que pratica a justiça é nascido dele.”", "comentario": "A prática da justiça não nasce do esforço humano para conquistar o favor de Deus; ela floresce como evidência do novo nascimento que procede unicamente dEle. João conduz a igreja a uma conclusão que emerge naturalmente de tudo o que foi dito acerca de Cristo: “Se sabeis que ele é justo, reconhecei também que todo aquele que pratica a justiça é nascido dele” [1 João 2:29]. O Cristo Glorioso é justo em Seu caráter, justo em Suas palavras e justo em Seus julgamentos. Sua justiça não oscila. Seu veredicto não falha. Sua santidade não conhece sombra alguma. Por isso, aqueles que foram alcançados por Sua Graça passam a refletir, ainda que imperfeitamente, os traços da nova vida que receberam. João não apresenta a prática da justiça como o caminho para o novo nascimento, mas como sua evidência visível. A árvore é conhecida por seus frutos. A fonte é reconhecida por suas águas. O novo nascimento se manifesta por uma vida transformada. A justiça não produz a filiação. A filiação produz a justiça. Onde Cristo reina, a vida é moldada por Sua verdade. Onde o Salvador do Mundo habita, a justiça começa a florescer. Os seus rastros se tornam visíveis. A transformação se torna evidente. Cristo permanece perfeitamente justo.", "oracao": "Nós Te adoramos, ó Cordeiro Justo, pois a Tua justiça jamais conhece oscilação e o Teu julgamento é infalível. Tu és puro em Teu caráter, fiel em Tuas promessas e irrepreensível em Teus vereditos. Concede-nos a Graça de viver como filhos que refletem a obra que Tu realizaste em nosso interior. Que nossos pensamentos, palavras e atitudes sejam moldados pela verdade do Teu Evangelho, para que os frutos da nova vida se tornem visíveis diante dos homens.", "mov": 4}], "perguntas": {"Devocional": ["Como a verdade de que “Deus é luz, e não há nele treva nenhuma” confronta as áreas que tenho tentado esconder na minha vida espiritual oculta?", "Minha prática de confissão tem sido um ato religioso superficial ou um concordar sincero com Deus sobre a corrupção do meu coração?", "De que forma saber que tenho Jesus Cristo, o Justo, como meu Advogado intercedendo permanentemente junto ao Pai altera minha reação após uma falha ou pecado?", "Meu desejo de conhecer a Deus tem-se manifestado num amor ativo pela Sua Palavra ou apenas numa admiração intelectual abstrata?", "Onde, na minha vida, ainda procuro novidade quando Deus já me concedeu plenitude na Palavra recebida desde o princípio?"], "Comunidade": ["João afirma que andar na luz produz comunhão uns com os outros. Existe alguma mágoa ou falta de transparência entre mim e algum irmão que me empurre para a penumbra?", "Como podemos, enquanto comunidade, manifestar o testemunho concreto do “Verbo da vida” num mundo perdido em sombras e discursos vazios?", "Nossa comunhão tem sido baseada em afinidades humanas e passageiras ou na participação espiritual conjunta na vida do Pai e do Filho?", "De que forma o sangue de Jesus, que nos purifica de todo pecado, nos capacita a exercer graça e perdão mútuo na igreja local, eliminando o orgulho?", "Quem, entre nós, está caminhando para fora da comunhão? Como exercer discernimento sem cair no medo, lembrando que “a verdade permanece”?"], "Família": ["Como posso refletir a luz de Cristo no ambiente do meu lar, garantindo que minha profissão de fé com os lábios corresponda ao meu comportamento com os familiares?", "Estamos a construir uma cultura familiar de encobrimento de falhas (aparência de santidade) ou um ambiente seguro de confissão, arrependimento e graça soberana?", "Como o senhorio e os mandamentos de Cristo podem governar as decisões e as rotinas diárias da nossa casa esta semana?", "Sendo o amor a evidência da transformação gerada pelo novo nascimento, de que formas práticas minha família pode notar que o Verbo habita no meu coração através dos meus afetos e atitudes?", "“Não ameis o mundo.” Que afeições desordenadas têm disputado, em nosso lar, o lugar que pertence somente ao Pai?"]}, "caminhos": [{"t": "Andar na luz", "d": "Esta semana, trarei à luz, em confissão sincera diante de Deus, uma área que tenho mantido na penumbra — concordando com Ele, sem suavizar nem renomear o pecado."}, {"t": "Restaurar a comunhão", "d": "Procurarei um irmão de quem me afastei, removendo a barreira que me empurra para as trevas, lembrando que andar na luz produz comunhão uns com os outros."}, {"t": "Obedecer por amor", "d": "Escolherei um mandamento de Cristo que tenho negligenciado e o guardarei como resposta de gratidão — não para conquistar favor, mas porque O conheço."}, {"t": "Permanecer na Palavra", "d": "Reservarei um tempo diário para que a Palavra recebida desde o princípio habite em mim, recusando o fascínio das vozes que prometem novidade fora de Cristo."}]};
+
+/* ============ EMBLEMA (SVG inline) — a Luz e o Verbo ============ */
+const EMBLEMA = `
+<svg class="emblema" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <radialGradient id="halo" cx="50%" cy="42%" r="55%">
+      <stop offset="0%" stop-color="var(--gold-bright)" stop-opacity="0.95"/>
+      <stop offset="45%" stop-color="var(--gold)" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="var(--gold)" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="100" cy="84" r="78" fill="url(#halo)"/>
+  <!-- raios de luz -->
+  <g stroke="var(--gold)" stroke-width="1.4" opacity="0.7" stroke-linecap="round">
+    ${Array.from({length:12}).map((_,k)=>{const a=(k/12)*Math.PI*2-Math.PI/2;const x1=100+Math.cos(a)*30,y1=84+Math.sin(a)*30,x2=100+Math.cos(a)*(k%2?52:62),y2=84+Math.sin(a)*(k%2?52:62);return `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}"/>`}).join('')}
+  </g>
+  <!-- livro aberto / a Palavra -->
+  <g transform="translate(100,118)">
+    <path d="M -44 -2 Q -22 -14 0 -6 Q 22 -14 44 -2 L 44 26 Q 22 18 0 26 Q -22 18 -44 26 Z"
+      fill="none" stroke="var(--gold)" stroke-width="2.4" stroke-linejoin="round"/>
+    <line x1="0" y1="-6" x2="0" y2="26" stroke="var(--gold)" stroke-width="2.4"/>
+    <path d="M -34 2 Q -18 -4 -6 0 M -34 9 Q -18 3 -6 7 M 6 0 Q 18 -4 34 2 M 6 7 Q 18 3 34 9"
+      fill="none" stroke="var(--gold)" stroke-width="1.1" opacity="0.6"/>
+  </g>
+  <circle cx="100" cy="60" r="7" fill="var(--gold-bright)"/>
+</svg>`;
+
+/* ============ TEMAS POR MOVIMENTO (luz litúrgica) ============ */
+const THEMES = {
+  hero:{a:'#1B2140', b:'#0A0C18', accent:'#D9A93E'},   // noite estrelada
+  1:{a:'#1B2140', b:'#0A0C18', accent:'#C9B36A'},        // o Verbo no princípio — noite e ouro tênue
+  2:{a:'#2A2350', b:'#0C0A18', accent:'#E6B83E'},        // Deus é luz — índigo p/ aurora
+  3:{a:'#26402F', b:'#0A140E', accent:'#7FB069'},        // o Advogado, andar na luz — verde sereno
+  4:{a:'#3A2240', b:'#120A14', accent:'#C77DBA'},        // permanecei nele — vinho/púrpura régio
+  benc:{a:'#4A3410', b:'#140E04', accent:'#F2D27A'}      // a manifestação — aurora dourada
+};
+const MOV_INFO = {
+  1:{rom:'I', titulo:'O Verbo da Vida', sub:'A eternidade que falou, habitou e foi contemplada. O que era desde o princípio veio ao encontro de pecadores, para que a comunhão com o Pai fosse anunciada e a alegria, completa.'},
+  2:{rom:'II', titulo:'Deus é Luz', sub:'Não há nele treva nenhuma. A luz expõe o que o coração esconde e conduz o pecador arrependido ao descanso da Graça. Confessar é concordar com Deus; o sangue de Jesus purifica de todo pecado.'},
+  3:{rom:'III', titulo:'O Advogado e a Obediência', sub:'Se alguém pecar, temos Advogado junto ao Pai, Jesus Cristo, o Justo. Conhecê-lo é guardar seus mandamentos; permanecer nele é andar como ele andou — não amando o mundo, mas a vontade que permanece.'},
+  4:{rom:'IV', titulo:'Permanecei Nele', sub:'Já é a última hora. Em meio às vozes que enganam, a unção do Santo conduz à verdade. Aquele que confessa o Filho tem o Pai; quem permanece, aguardará sua manifestação com confiança.'}
+};
+
+/* ============ MONTAGEM DAS ESTAÇÕES ============ */
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function firstChar(s){return s ? s.trim().charAt(0) : '';}
+
+// Constrói lista de estações: hero, [cada movimento: capa + perícopes], roda, caminhos, bênção
+const stations = [];
+stations.push({type:'hero', theme:'hero'});
+[1,2,3,4].forEach(m=>{
+  stations.push({type:'movcover', mov:m, theme:m});
+  DATA.entries.filter(e=>e.mov===m).forEach(e=>{
+    stations.push({type:'pericope', mov:m, theme:m, data:e});
+  });
+});
+stations.push({type:'wheel', theme:4});
+stations.push({type:'paths', theme:4});
+stations.push({type:'benc', theme:'benc'});
+
+const TOTAL = stations.length;
+
+function renderStation(st, i){
+  const s = document.createElement('section');
+  s.className='station';
+  s.id='st'+i;
+  s.setAttribute('role','tabpanel');
+
+  if(st.type==='hero'){
+    s.innerHTML = `<div class="hero">
+      ${EMBLEMA}
+      <h1>O Verbo da Vida<span class="sub">Orações Matinais · Primeira Carta de João</span></h1>
+      <p class="anchor">“O que era desde o princípio, o que temos ouvido, o que temos visto com os nossos próprios olhos, o que contemplamos, e as nossas mãos apalparam, com respeito ao Verbo da vida.”
+        <cite>1 João 1.1</cite></p>
+      <div class="hero-divider"></div>
+      <p class="byline">Arisvaldo Marinho Cunha</p>
+      <div class="lead-note">
+        <span class="lt">Para quem conduz o grupo</span>
+        Esta jornada percorre 1 João 1—2 em quatro movimentos: <em>o Verbo manifestado</em>, <em>Deus é luz</em>, <em>o Advogado e a obediência</em> e <em>permanecei nele</em>. Avance versículo a versículo; leia o texto bíblico em voz alta, demore-se no comentário e feche cada parada com a oração. A <strong>Roda de Reflexão</strong>, ao final, abre a conversa do grupo; os <strong>caminhos da semana</strong> levam a Palavra para a vida. O fundo da página acompanha, em luz, o avanço da carta — da noite à aurora.
+      </div>
+    </div>`;
+  }
+
+  else if(st.type==='movcover'){
+    const info = MOV_INFO[st.mov];
+    s.innerHTML = `<div class="loc">
+        <span class="pos">Movimento ${st.mov} de 4</span>
+        <span class="mov-tag">1 João · Primeira Carta</span>
+      </div>
+      <div class="mov-cover">
+        <div class="mov-num">${info.rom}</div>
+        <h2>${info.titulo}</h2>
+        <p>${info.sub}</p>
+      </div>`;
+  }
+
+  else if(st.type==='pericope'){
+    const e = st.data;
+    const txt = esc(e.texto);
+    s.innerHTML = `<div class="loc">
+        <span class="pos">${esc(e.ref)}</span>
+        <span class="mov-tag">Movimento ${st.mov} · ${MOV_INFO[st.mov].titulo}</span>
+      </div>
+      <div class="scripture">
+        <div class="ref">${esc(e.ref)}</div>
+        <blockquote>${txt}</blockquote>
+      </div>
+      <div class="section-label"><span class="ln l"></span><span>Comentário</span><span class="ln"></span></div>
+      <p class="commentary">${esc(e.comentario)}</p>
+      <div class="section-label"><span class="ln l"></span><span>Oração Matinal</span><span class="ln"></span></div>
+      <div class="prayer">
+        <p>${esc(e.oracao)}</p>
+        <span class="amen">Amém</span>
+      </div>`;
+  }
+
+  else if(st.type==='wheel'){
+    s.innerHTML = `<div class="loc"><span class="pos">Reflexão em grupo</span><span class="mov-tag">A Roda</span></div>
+      <div class="wheel-intro">
+        <h2>Roda de Reflexão</h2>
+        <p>Escolham uma esfera, sorteiem uma pergunta, conversem e guardem o que partilharam. As reflexões ficam salvas neste dispositivo.</p>
+      </div>
+      <div class="spheres" id="spheres"></div>
+      <div class="qcard" id="qcard">
+        <div class="qmeta" id="qmeta">Comece por aqui</div>
+        <div class="q placeholder" id="qtext">Escolham uma esfera e sorteiem a primeira pergunta.</div>
+      </div>
+      <div class="draw-row">
+        <button class="btn" id="drawBtn">⟳ Sortear pergunta</button>
+      </div>
+      <div class="answer-box">
+        <label for="ansText">Registro da reflexão</label>
+        <textarea id="ansText" placeholder="Escrevam aqui o que o grupo partilhou..."></textarea>
+      </div>
+      <div class="answer-box author-row">
+        <label for="ansAuthor">Quem partilhou (opcional)</label>
+        <input type="text" id="ansAuthor" placeholder="Nome ou inicial">
+      </div>
+      <div class="draw-row">
+        <button class="btn ghost" id="saveBtn">＋ Guardar reflexão</button>
+      </div>
+      <div class="saved-head"><span>Reflexões guardadas</span><span class="ln"></span></div>
+      <ul class="reflist" id="reflist"></ul>
+      <div class="export-row">
+        <button class="btn ghost" id="copyBtn">Copiar tudo</button>
+        <button class="btn ghost" id="txtBtn">Baixar .txt</button>
+        <button class="btn ghost" id="printBtn2">Imprimir / PDF</button>
+      </div>
+      <p class="persist-note">As reflexões, o volume e o tamanho do texto ficam salvos neste dispositivo. <button id="clearBtn">Limpar reflexões</button></p>`;
+  }
+
+  else if(st.type==='paths'){
+    s.innerHTML = `<div class="loc"><span class="pos">Caminhos da semana</span><span class="mov-tag">Da Palavra à vida</span></div>
+      <div class="wheel-intro">
+        <h2>Caminhos da Semana</h2>
+        <p>Quatro compromissos que traduzem 1 João em passos concretos. Toquem para assumir.</p>
+      </div>
+      <div class="paths" id="paths"></div>`;
+  }
+
+  else if(st.type==='benc'){
+    s.innerHTML = `<div class="loc"><span class="pos">Bênção final</span><span class="mov-tag">A Vida Eterna</span></div>
+      <div class="benc">
+        ${EMBLEMA}
+        <div class="tri">
+          <div>A Vida <span class="accent">Manifestada</span></div>
+          <div>A Luz <span class="accent">Resplandecente</span></div>
+          <div>A Comunhão <span class="accent">Permanente</span></div>
+        </div>
+        <p class="closing">“E esta é a promessa que ele mesmo nos fez: a vida eterna.” Permanecei nele, filhinhos, para que, quando ele se manifestar, tenhamos confiança e dele não nos afastemos envergonhados na sua vinda.</p>
+        <div class="amen">Amém</div>
+        <p class="byline" style="margin-top:2rem;font-family:var(--display);letter-spacing:.14em;font-size:calc(.72rem * var(--fs));color:var(--ivory-faint);text-transform:uppercase">Arisvaldo Marinho Cunha · A. M. Cunha</p>
+      </div>`;
+  }
+
+  return s;
+}
+
+/* ============ ESTADO E NAVEGAÇÃO ============ */
+const stage = document.getElementById('stage');
+const rail = document.getElementById('rail');
+let cur = 0;
+let visited = new Set([0]);
+
+// monta estações e trilha
+stations.forEach((st,i)=>{
+  stage.appendChild(renderStation(st,i));
+  const d = document.createElement('button');
+  d.className='dot'; d.setAttribute('role','tab');
+  d.setAttribute('aria-label', railLabel(st,i));
+  d.addEventListener('click', ()=>goTo(i));
+  rail.appendChild(d);
+});
+
+function railLabel(st,i){
+  if(st.type==='hero') return 'Abertura';
+  if(st.type==='movcover') return 'Movimento '+st.mov;
+  if(st.type==='pericope') return st.data.ref;
+  if(st.type==='wheel') return 'Roda de Reflexão';
+  if(st.type==='paths') return 'Caminhos da semana';
+  if(st.type==='benc') return 'Bênção final';
+  return 'Estação '+(i+1);
+}
+
+function applyTheme(key){
+  const t = THEMES[key] || THEMES.hero;
+  const root = document.documentElement.style;
+  root.setProperty('--bg-a', t.a);
+  root.setProperty('--bg-b', t.b);
+  root.setProperty('--accent', t.accent);
+  root.setProperty('--accent-soft', hexA(t.accent, .14));
+  root.setProperty('--glow', hexA(t.accent, .24));
+}
+function hexA(hex, a){
+  const h = hex.replace('#',''); const n = parseInt(h,16);
+  const r=(n>>16)&255, g=(n>>8)&255, b=n&255;
+  return `rgba(${r},${g},${b},${a})`;
+}
+
+function goTo(i, push=true){
+  if(i<0||i>=TOTAL) return;
+  document.getElementById('st'+cur).classList.remove('show');
+  cur=i; visited.add(i);
+  const st = stations[cur];
+  applyTheme(st.theme);
+  const el = document.getElementById('st'+cur);
+  el.classList.add('show');
+  window.scrollTo({top:0, behavior:'smooth'});
+  updateRail();
+  document.getElementById('navCenter').textContent =
+    cur===0 ? 'Início da jornada' :
+    cur===TOTAL-1 ? 'Bênção final' :
+    railLabel(st,cur);
+  document.getElementById('prevBtn').disabled = cur===0;
+  const nb = document.getElementById('nextBtn');
+  nb.disabled = cur===TOTAL-1;
+  nb.innerHTML = cur===TOTAL-2 ? 'Bênção ▸' : 'Avançar ▸';
+  if(st.type==='wheel') initWheel();
+  if(st.type==='paths') initPaths();
+  saveState();
+}
+function updateRail(){
+  [...rail.children].forEach((d,i)=>{
+    d.classList.toggle('active', i===cur);
+    d.classList.toggle('done', i<cur || (visited.has(i)&&i!==cur));
+    if(i===cur) d.setAttribute('aria-selected','true'); else d.removeAttribute('aria-selected');
+  });
+  // mantém o ponto ativo visível
+  const ad = rail.children[cur];
+  if(ad) ad.scrollIntoView({inline:'center', block:'nearest', behavior:'smooth'});
+}
+
+document.getElementById('prevBtn').onclick=()=>goTo(cur-1);
+document.getElementById('nextBtn').onclick=()=>goTo(cur+1);
+document.addEventListener('keydown', e=>{
+  const tag = (e.target.tagName||'').toLowerCase();
+  if(tag==='textarea'||tag==='input') return;
+  if(e.key==='ArrowRight') goTo(cur+1);
+  if(e.key==='ArrowLeft') goTo(cur-1);
+});
+// swipe
+let tsx=0, tsy=0;
+document.addEventListener('touchstart', e=>{tsx=e.changedTouches[0].clientX;tsy=e.changedTouches[0].clientY;}, {passive:true});
+document.addEventListener('touchend', e=>{
+  const dx=e.changedTouches[0].clientX-tsx, dy=e.changedTouches[0].clientY-tsy;
+  if(Math.abs(dx)>64 && Math.abs(dx)>Math.abs(dy)*1.6){ if(dx<0) goTo(cur+1); else goTo(cur-1); }
+}, {passive:true});
+
+/* ============ RODA DE REFLEXÃO ============ */
+let wheelInit=false;
+let activeSphere=null;
+let pools={}; // esfera -> array embaralhado restante
+const spheresOrder = ['Devocional','Comunidade','Família'];
+
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function initWheel(){
+  if(wheelInit) { renderRefList(); return; }
+  wheelInit=true;
+  const sc = document.getElementById('spheres');
+  spheresOrder.forEach(name=>{
+    pools[name]=shuffle(DATA.perguntas[name]);
+    const b=document.createElement('button');
+    b.className='sphere'; b.dataset.s=name;
+    b.innerHTML=`${name} <span class="count">${DATA.perguntas[name].length}</span>`;
+    b.onclick=()=>selectSphere(name);
+    sc.appendChild(b);
+  });
+  document.getElementById('drawBtn').onclick=drawQ;
+  document.getElementById('saveBtn').onclick=saveRef;
+  document.getElementById('copyBtn').onclick=copyAll;
+  document.getElementById('txtBtn').onclick=downloadTxt;
+  document.getElementById('printBtn2').onclick=()=>preparePrint();
+  document.getElementById('clearBtn').onclick=clearRefs;
+  selectSphere('Devocional');
+  renderRefList();
+}
+function selectSphere(name){
+  activeSphere=name;
+  [...document.querySelectorAll('.sphere')].forEach(b=>b.classList.toggle('active', b.dataset.s===name));
+  updateCounts();
+}
+function updateCounts(){
+  [...document.querySelectorAll('.sphere')].forEach(b=>{
+    const n=b.dataset.s;
+    b.querySelector('.count').textContent = pools[n].length;
+  });
+}
+function drawQ(){
+  if(!activeSphere) return;
+  const draft = document.getElementById('ansText').value.trim();
+  if(draft && !confirm('Há um registro não guardado. Sortear nova pergunta vai mantê-lo no campo, mas a pergunta mudará. Continuar?')) return;
+  if(pools[activeSphere].length===0){ pools[activeSphere]=shuffle(DATA.perguntas[activeSphere]); toast('Esfera reembaralhada — todas já foram sorteadas.'); }
+  const q = pools[activeSphere].shift();
+  const card=document.getElementById('qcard');
+  document.getElementById('qmeta').textContent = activeSphere + ' · vida ' + sphereWord(activeSphere);
+  const qt=document.getElementById('qtext');
+  qt.classList.remove('placeholder'); qt.textContent=q;
+  card.dataset.q=q; card.dataset.sphere=activeSphere;
+  updateCounts();
+}
+function sphereWord(s){return s==='Devocional'?'devocional (individual)':s==='Comunidade'?'comunitária (igreja e próximo)':'familiar (lar)';}
+
+let refs = [];
+function saveRef(){
+  const card=document.getElementById('qcard');
+  const q = card.dataset.q;
+  if(!q){ toast('Sorteiem uma pergunta primeiro.'); return; }
+  const a = document.getElementById('ansText').value.trim();
+  if(!a){ toast('Escrevam a reflexão antes de guardar.'); return; }
+  const author = document.getElementById('ansAuthor').value.trim();
+  refs.unshift({sphere:card.dataset.sphere||activeSphere, q, a, author, ts:Date.now()});
+  document.getElementById('ansText').value='';
+  document.getElementById('ansAuthor').value='';
+  renderRefList(); persistRefs();
+  toast('Reflexão guardada.');
+}
+function renderRefList(){
+  const ul=document.getElementById('reflist'); if(!ul) return;
+  ul.innerHTML='';
+  if(refs.length===0){
+    ul.innerHTML='<li class="empty">Ainda não há reflexões guardadas. Sorteiem a primeira pergunta para começar.</li>';
+    return;
+  }
+  refs.forEach((r,idx)=>{
+    const li=document.createElement('li');
+    li.innerHTML=`<div class="rl-meta"><span>${esc(r.sphere)}${r.author?' · <span class="rl-author">'+esc(r.author)+'</span>':''}</span>
+      <button class="del" data-i="${idx}">remover</button></div>
+      <div class="rl-q">“${esc(r.q)}”</div>
+      <div class="rl-a">${esc(r.a)}</div>`;
+    ul.appendChild(li);
+  });
+  ul.querySelectorAll('.del').forEach(b=>b.onclick=()=>{refs.splice(+b.dataset.i,1);renderRefList();persistRefs();});
+}
+function clearRefs(){
+  if(refs.length && !confirm('Remover todas as reflexões guardadas neste dispositivo?')) return;
+  refs=[]; renderRefList(); persistRefs(); toast('Reflexões removidas.');
+}
+function exportText(){
+  const d=new Date().toLocaleDateString('pt-BR');
+  let out=`O VERBO DA VIDA — Orações Matinais sobre 1 João\nReflexões do grupo · ${d}\n${'='.repeat(46)}\n\n`;
+  if(refs.length===0) out+='(Nenhuma reflexão guardada.)\n';
+  refs.slice().reverse().forEach((r,i)=>{
+    out+=`${i+1}. [${r.sphere}${r.author?' — '+r.author:''}]\n   Pergunta: ${r.q}\n   Reflexão: ${r.a}\n\n`;
+  });
+  out+=`${'-'.repeat(46)}\n“E esta é a promessa que ele mesmo nos fez: a vida eterna.” (1 João 2.25)\nArisvaldo Marinho Cunha · Série Orações Matinais\n`;
+  return out;
+}
+function downloadTxt(){
+  const blob=new Blob([exportText()],{type:'text/plain;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='reflexoes-1joao.txt';a.click();URL.revokeObjectURL(a.href);
+  toast('Arquivo .txt baixado.');
+}
+async function copyAll(){
+  try{ await navigator.clipboard.writeText(exportText()); toast('Copiado para a área de transferência.'); }
+  catch(e){ toast('Não foi possível copiar automaticamente.'); }
+}
+
+/* ============ CAMINHOS ============ */
+let pathsInit=false, pathState={};
+function initPaths(){
+  if(pathsInit){return;}
+  pathsInit=true;
+  const wrap=document.getElementById('paths');
+  DATA.caminhos.forEach((c,i)=>{
+    const b=document.createElement('button');
+    b.className='path'; b.type='button'; b.setAttribute('aria-pressed', pathState[i]?'true':'false');
+    b.innerHTML=`<h3>${esc(c.t)}</h3><p>${esc(c.d)}</p>
+      <div class="state">${pathState[i]?'Caminho assumido':'Assumir este caminho'}</div>`;
+    b.onclick=()=>{
+      const on = b.getAttribute('aria-pressed')==='true';
+      b.setAttribute('aria-pressed', on?'false':'true');
+      b.querySelector('.state').textContent = on?'Assumir este caminho':'Caminho assumido';
+      pathState[i]=!on; persistPaths();
+    };
+    wrap.appendChild(b);
+  });
+}
+
+/* ============ TOAST ============ */
+let toastT;
+function toast(msg){
+  const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
+  clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),2600);
+}
+
+/* ============ FONTE / APRESENTAÇÃO ============ */
+const FS_STEPS=[0.9,1,1.15,1.32,1.5];
+let fsIdx=1;
+function applyFont(){document.documentElement.style.setProperty('--fs',FS_STEPS[fsIdx]);saveState();}
+document.getElementById('fplus').onclick=()=>{fsIdx=Math.min(FS_STEPS.length-1,fsIdx+1);applyFont();};
+document.getElementById('fminus').onclick=()=>{fsIdx=Math.max(0,fsIdx-1);applyFont();};
+const presentBtn=document.getElementById('presentBtn');
+presentBtn.onclick=()=>{
+  const on=presentBtn.getAttribute('aria-pressed')==='true';
+  presentBtn.setAttribute('aria-pressed', on?'false':'true');
+  if(!on){ fsIdx=Math.max(fsIdx,3); applyFont(); } else { fsIdx=1; applyFont(); }
+};
+document.getElementById('printBtn').onclick=preparePrint;
+function preparePrint(){
+  // injeta, ao lado de cada textarea, o texto digitado para sair na impressão
+  document.querySelectorAll('textarea').forEach(ta=>{
+    let pa = ta.parentNode.querySelector('.print-answer');
+    if(!pa){ pa=document.createElement('div'); pa.className='print-answer'; ta.parentNode.appendChild(pa); }
+    pa.textContent = ta.value || '';
+  });
+  window.print();
+}
+
+/* ============ ÁUDIO ============ */
+const audio=document.getElementById('audio');
+const playBtn=document.getElementById('playBtn');
+const vol=document.getElementById('vol');
+const audLabel=document.getElementById('audLabel');
+const audioPop=document.getElementById('audioPop');
+let playing=false, fadeT;
+audio.volume=0.45;
+function setIcon(p){
+  playBtn.innerHTML = p
+    ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>'
+    : '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+}
+function fadeTo(target){
+  clearInterval(fadeT);
+  const step=(target-audio.volume)/14;
+  fadeT=setInterval(()=>{
+    let nv=audio.volume+step;
+    if((step>0&&nv>=target)||(step<0&&nv<=target)){nv=target;clearInterval(fadeT);if(target===0)audio.pause();}
+    audio.volume=Math.max(0,Math.min(1,nv));
+  },36);
+}
+playBtn.onclick=()=>{
+  audioPop.classList.remove('min');
+  if(!playing){
+    audLabel.textContent='Carregando...';
+    const tv=parseFloat(vol.value);
+    audio.volume=0; audio.play().then(()=>{
+      playing=true; setIcon(true); fadeTo(tv);
+      audLabel.textContent='Onde o Coração Descansa';
+    }).catch(()=>{
+      audLabel.textContent='Áudio indisponível';
+      toast('Não foi possível iniciar a música. Verifique o arquivo de áudio.');
+    });
+  } else {
+    fadeTo(0); playing=false; setIcon(false); audLabel.textContent='Música pausada';
+  }
+};
+vol.oninput=()=>{ if(playing) audio.volume=parseFloat(vol.value); saveState(); };
+document.getElementById('audMin').onclick=()=>audioPop.classList.add('min');
+
+/* ============ PERSISTÊNCIA ============ */
+const LS='oracoes_1joao_v1';
+function persistRefs(){save();}
+function persistPaths(){save();}
+function saveState(){save();}
+function save(){
+  try{
+    localStorage.setItem(LS, JSON.stringify({
+      cur, visited:[...visited], fsIdx,
+      vol: vol?parseFloat(vol.value):0.45,
+      refs, pathState
+    }));
+  }catch(e){/* sandbox: degrada para sessão */}
+}
+function load(){
+  try{
+    const raw=localStorage.getItem(LS); if(!raw) return null;
+    return JSON.parse(raw);
+  }catch(e){return null;}
+}
+
+/* ============ STARS ============ */
+const cv=document.getElementById('stars');
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!reduce){
+  const ctx=cv.getContext('2d'); let stars=[];
+  function rs(){cv.width=innerWidth;cv.height=innerHeight;
+    const n=Math.floor(innerWidth*innerHeight/9000);
+    stars=Array.from({length:n},()=>({x:Math.random()*cv.width,y:Math.random()*cv.height*0.85,
+      r:Math.random()*1.3+0.2,p:Math.random()*Math.PI*2,sp:Math.random()*0.018+0.004}));}
+  rs(); addEventListener('resize',rs);
+  (function anim(){ctx.clearRect(0,0,cv.width,cv.height);
+    stars.forEach(s=>{s.p+=s.sp;const o=0.3+Math.sin(s.p)*0.35;
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(242,210,122,${Math.max(0,o)})`;ctx.fill();});
+    requestAnimationFrame(anim);})();
+}
+
+/* ============ INIT ============ */
+(function init(){
+  const sv=load();
+  if(sv){
+    if(typeof sv.fsIdx==='number'){fsIdx=sv.fsIdx;}
+    refs = Array.isArray(sv.refs)?sv.refs:[];
+    pathState = sv.pathState||{};
+    visited = new Set(sv.visited||[0]);
+    if(vol && typeof sv.vol==='number'){vol.value=sv.vol; audio.volume=sv.vol;}
+  }
+  applyFont();
+  // mostra primeira estação ou retoma
+  const start = (sv && typeof sv.cur==='number' && sv.cur>0 && sv.cur<TOTAL) ? sv.cur : 0;
+  document.getElementById('st0').classList.add('show'); // garante uma visível
+  if(start!==0){ document.getElementById('st0').classList.remove('show'); }
+  goTo(start, false);
+  if(sv && refs.length){ setTimeout(()=>toast('Reflexões salvas neste dispositivo foram restauradas.'),700); }
+})();
+</script>
+</body>
+</html>
